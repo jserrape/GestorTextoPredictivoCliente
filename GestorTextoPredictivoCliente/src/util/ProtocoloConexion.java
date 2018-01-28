@@ -33,15 +33,11 @@ public class ProtocoloConexion {
     }
 
     /**
-     * Función que en función de un código selecciona el tipo de mensaje que debe enviar al servidor 
-       0   Comunicar mac
-       1   Solicitar lista de dataSets
-       2   Crear dataSet
-       3   Eliminar dataSet
-       4   DataSet cargado
-       5   Cargar DataSet
-       6   Añadir fichero al conjunto
-       7   Hacer prediccion
+     * Función que en función de un código selecciona el tipo de mensaje que
+     * debe enviar al servidor 0 Comunicar mac 1 Solicitar lista de dataSets 2
+     * Crear dataSet 3 Eliminar dataSet 4 DataSet cargado 5 Cargar DataSet 6
+     * Añadir fichero al conjunto 7 Hacer prediccion
+     *
      * @param cod Codigo del tipo de mensaje
      * @param mensaje Mensaje que envía al servidor
      * @return Respuesa del servidor
@@ -66,6 +62,9 @@ public class ProtocoloConexion {
                 break;
             case 7:
                 return this.solicitarPrediccion(mensaje);
+            case 8:
+                desconectar();
+                break;
         }
         return "";
     }
@@ -86,6 +85,7 @@ public class ProtocoloConexion {
 
     /**
      * Solicita al servidor la lisa de los dataSet asociados
+     *
      * @return Lisa de dataSets
      */
     private String obtenerListaDataSet() {
@@ -104,9 +104,10 @@ public class ProtocoloConexion {
     }
 
     /**
-     * Solicita al servidor crear un daaSet 
+     * Solicita al servidor crear un daaSet
+     *
      * @param nombre Nombre y características del dataSet
-     * @return Lista de todos los dataSets 
+     * @return Lista de todos los dataSets
      */
     private String crearDataSet(String nombre) {
         config.getOut().println("2" + nombre);
@@ -120,8 +121,9 @@ public class ProtocoloConexion {
 
     /**
      * Pide al servidor eliminar un dataSet determinado
+     *
      * @param nombre Nombre del dataSet a eliminar
-     * @return Lista de todos los dataSets 
+     * @return Lista de todos los dataSets
      */
     private String eliminarDataSet(String nombre) {
         config.getOut().println("3" + nombre);
@@ -135,6 +137,7 @@ public class ProtocoloConexion {
 
     /**
      * Solicita saber al servidor qué dataSet tiene cargado
+     *
      * @return DataSet cargado
      */
     private String dataSetCargado() {
@@ -149,6 +152,7 @@ public class ProtocoloConexion {
 
     /**
      * Solicita al servidor que cargue un dataSet
+     *
      * @param mensaje Nombre del dataSet a cargar
      * @return Nombre del dataSet que ha cargado
      */
@@ -163,8 +167,10 @@ public class ProtocoloConexion {
     }
 
     /**
-     * Envia una cadena de texto al servidor para que la analice para fuuras predicciones.
-     * @param mensaje Cadena de texto a analizar 
+     * Envia una cadena de texto al servidor para que la analice para fuuras
+     * predicciones.
+     *
+     * @param mensaje Cadena de texto a analizar
      */
     private void enviarTexto(String mensaje) {
         config.getOut().println("6" + mensaje);
@@ -172,6 +178,7 @@ public class ProtocoloConexion {
 
     /**
      * Solicita una predicción a partir de una semilla
+     *
      * @param mensaje Semilla de predicción
      * @return Array con las predicciones obenidas
      */
@@ -188,8 +195,9 @@ public class ProtocoloConexion {
     /**
      * Se desconecta del servidor
      */
-    private void desconectar() {
+    public void desconectar() {
         try {
+            config.getOut().println("8");
             config.getOut().close();
             config.getIn().close();
             config.getStdIn().close();
@@ -201,6 +209,7 @@ public class ProtocoloConexion {
 
     /**
      * Obtiene la direccion ip y mac del equipo
+     *
      * @return Direccion mac
      */
     private static String getMac() {

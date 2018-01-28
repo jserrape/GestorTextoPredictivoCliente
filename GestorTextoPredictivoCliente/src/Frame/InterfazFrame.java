@@ -8,18 +8,19 @@ package Frame;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
@@ -133,16 +134,16 @@ public class InterfazFrame extends javax.swing.JFrame {
         itemDeshacer = new javax.swing.JMenuItem();
         itemRehacer = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        itemCortar = new javax.swing.JMenuItem();
+        itemCopiar = new javax.swing.JMenuItem();
+        itemPegar = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem15 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
+        itemSeleccionarTodo = new javax.swing.JMenuItem();
+        itemFechaHora = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
@@ -302,30 +303,50 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenu2.add(itemRehacer);
         jMenu2.add(jSeparator2);
 
-        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem7.setText("Cortar");
-        jMenu2.add(jMenuItem7);
-
-        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem8.setText("Copiar");
-        jMenu2.add(jMenuItem8);
-
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem9.setText("Pegar");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        itemCortar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        itemCortar.setText("Cortar");
+        itemCortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                itemCortarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem9);
+        jMenu2.add(itemCortar);
+
+        itemCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        itemCopiar.setText("Copiar");
+        itemCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCopiarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemCopiar);
+
+        itemPegar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        itemPegar.setText("Pegar");
+        itemPegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPegarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemPegar);
 
         jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0));
         jMenuItem10.setText("Eliminar");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
         jMenu2.add(jSeparator3);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem11.setText("Buscar...");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem11);
 
         jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -333,13 +354,23 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenu2.add(jMenuItem13);
         jMenu2.add(jSeparator4);
 
-        jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem15.setText("Seleccionar todo");
-        jMenu2.add(jMenuItem15);
+        itemSeleccionarTodo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        itemSeleccionarTodo.setText("Seleccionar todo");
+        itemSeleccionarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSeleccionarTodoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemSeleccionarTodo);
 
-        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        jMenuItem16.setText("Hora y fecha");
-        jMenu2.add(jMenuItem16);
+        itemFechaHora.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        itemFechaHora.setText("Hora y fecha");
+        itemFechaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemFechaHoraActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemFechaHora);
 
         jMenuBar1.add(jMenu2);
 
@@ -405,39 +436,36 @@ public class InterfazFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void itemPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPegarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+        this.jTextArea1.paste();
+    }//GEN-LAST:event_itemPegarActionPerformed
 
     private void ItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarComoActionPerformed
 
     }//GEN-LAST:event_ItemGuardarComoActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        // TODO add your handling code here:
-        jTextArea1.setText("");
+            jTextArea1.setText("");
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        this.protocolo.enviarMensaje(8, "");
         this.dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        // TODO add your handling code here:
         FormatoFrame ff = new FormatoFrame(this, true, font, this, this.config);
         ff.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        // TODO add your handling code here:
         ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
         conf.setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-        // TODO add your handling code here:
-        try {
+         try {
             IdiomaFrame id = new IdiomaFrame(this, false, this.config, this);
             id.setVisible(true);
         } catch (IOException ex) {
@@ -446,24 +474,54 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void botonCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCortarActionPerformed
-        // TODO add your handling code here:
-        this.jTextArea1.cut();
+           this.jTextArea1.cut();
     }//GEN-LAST:event_botonCortarActionPerformed
 
     private void botonCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCopiarActionPerformed
-        // TODO add your handling code here:
         this.jTextArea1.copy();
     }//GEN-LAST:event_botonCopiarActionPerformed
 
     private void botonPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPegarActionPerformed
-        // TODO add your handling code here:
         this.jTextArea1.paste();
     }//GEN-LAST:event_botonPegarActionPerformed
 
     private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
-        // TODO add your handling code here:
         this.jTextArea1.setText("");
     }//GEN-LAST:event_botonNuevoActionPerformed
+
+    private void itemCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCortarActionPerformed
+        this.jTextArea1.cut();
+    }//GEN-LAST:event_itemCortarActionPerformed
+
+    private void itemCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCopiarActionPerformed
+        this.jTextArea1.copy();
+    }//GEN-LAST:event_itemCopiarActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        if (this.jTextArea1.getSelectionStart() != this.jTextArea1.getSelectionEnd()) {
+            this.jTextArea1.setText(jTextArea1.getText().substring(0, this.jTextArea1.getSelectionStart())
+                    + jTextArea1.getText().substring(this.jTextArea1.getSelectionEnd(), jTextArea1.getText().length()));
+        }
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void itemFechaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFechaHoraActionPerformed
+        Date date = new Date();
+        DateFormat hourdateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        System.out.println(this.jTextArea1.getCaretPosition() + "");
+        StringBuilder sb = new StringBuilder(this.jTextArea1.getText());
+        sb.insert(this.jTextArea1.getCaretPosition(), hourdateFormat.format(date));
+        this.jTextArea1.setText(sb.toString());
+    }//GEN-LAST:event_itemFechaHoraActionPerformed
+
+    private void itemSeleccionarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSeleccionarTodoActionPerformed
+        this.jTextArea1.selectAll();
+    }//GEN-LAST:event_itemSeleccionarTodoActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        BuscarFrame buscar=new BuscarFrame(this,true,this.jTextArea1);
+        buscar.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -477,8 +535,13 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevo;
     private javax.swing.JButton botonPegar;
     private javax.swing.JButton botonRehacer;
+    private javax.swing.JMenuItem itemCopiar;
+    private javax.swing.JMenuItem itemCortar;
     private javax.swing.JMenuItem itemDeshacer;
+    private javax.swing.JMenuItem itemFechaHora;
+    private javax.swing.JMenuItem itemPegar;
     private javax.swing.JMenuItem itemRehacer;
+    private javax.swing.JMenuItem itemSeleccionarTodo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -488,17 +551,12 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -538,14 +596,14 @@ public class InterfazFrame extends javax.swing.JFrame {
         ItemGuardarComo.setText(this.config.getPalabra(7));
         jMenuItem5.setText(this.config.getPalabra(8));
         itemDeshacer.setText(this.config.getPalabra(9));
-        jMenuItem7.setText(this.config.getPalabra(10));
-        jMenuItem8.setText(this.config.getPalabra(11));
-        jMenuItem9.setText(this.config.getPalabra(12));
+        itemCortar.setText(this.config.getPalabra(10));
+        itemCopiar.setText(this.config.getPalabra(11));
+        itemPegar.setText(this.config.getPalabra(12));
         jMenuItem10.setText(this.config.getPalabra(13));
         jMenuItem11.setText(this.config.getPalabra(14));
         jMenuItem13.setText(this.config.getPalabra(15));
-        jMenuItem15.setText(this.config.getPalabra(16));
-        jMenuItem16.setText(this.config.getPalabra(17));
+        itemSeleccionarTodo.setText(this.config.getPalabra(16));
+        itemFechaHora.setText(this.config.getPalabra(17));
         jMenuItem17.setText(this.config.getPalabra(18));
         jMenuItem18.setText(this.config.getPalabra(19));
         jMenuItem19.setText(this.config.getPalabra(20));
