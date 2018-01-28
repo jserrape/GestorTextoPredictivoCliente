@@ -8,8 +8,11 @@ package Frame;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -17,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -66,6 +71,9 @@ public class InterfazFrame extends javax.swing.JFrame {
         this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo));
         this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
 
+        this.jTextArea1.addMouseListener(new MouseListenerImpl(this.jPopupMenu2, this.jTextArea1));
+
+        //Para rehacer y deshacer
         undo = new UndoManager();
         botonDeshacer.setEnabled(false);
         botonRehacer.setEnabled(false);
@@ -106,6 +114,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
         jToolBar1 = new javax.swing.JToolBar();
         botonNuevo = new javax.swing.JButton();
         botonAbrir = new javax.swing.JButton();
@@ -351,6 +360,11 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem13.setText("Reemplazar");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem13);
         jMenu2.add(jSeparator4);
 
@@ -446,7 +460,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ItemGuardarComoActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-            jTextArea1.setText("");
+        jTextArea1.setText("");
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -465,7 +479,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-         try {
+        try {
             IdiomaFrame id = new IdiomaFrame(this, false, this.config, this);
             id.setVisible(true);
         } catch (IOException ex) {
@@ -474,7 +488,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void botonCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCortarActionPerformed
-           this.jTextArea1.cut();
+        this.jTextArea1.cut();
     }//GEN-LAST:event_botonCortarActionPerformed
 
     private void botonCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCopiarActionPerformed
@@ -519,9 +533,15 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        BuscarFrame buscar=new BuscarFrame(this,true,this.jTextArea1);
+        BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1);
         buscar.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+        ReemplazarFrame ree = new ReemplazarFrame(this, true, this.jTextArea1);
+        ree.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -560,6 +580,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
@@ -761,6 +782,125 @@ public class InterfazFrame extends javax.swing.JFrame {
                 pos.setY(y);
             } catch (BadLocationException ex) {
                 throw new RuntimeException("Failed to get pixel position of caret", ex);
+            }
+        }
+    }
+
+    /**
+     * Lisener para detectar si se hace click derecho sobre el area de texto
+     */
+    private static class MouseListenerImpl implements MouseListener {
+
+        private final JPopupMenu popMenu;
+        private final javax.swing.JTextArea jTextArea;
+
+        public MouseListenerImpl(JPopupMenu pop, javax.swing.JTextArea jT) {
+            this.popMenu = pop;
+            this.jTextArea = jT;
+        }
+
+        /**
+         * Evento de pinchar y soltar.
+         *
+         * @param e Evento de pulsar el raton
+         */
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        /**
+         * Evento de presionar el botón.
+         *
+         * @param e Evento de pulsar el raton
+         */
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        /**
+         * Evento de soltar el botón.
+         *
+         * @param e Evento de pulsar el raton
+         */
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            if (e.getButton() == 3) {
+                this.popMenu.setVisible(false);
+                this.popMenu.removeAll();
+
+                JMenuItem item;
+
+                item = new JMenuItem("Cortar");
+                this.popMenu.add(item);
+                item.addActionListener(new ActionListenerImpl(jTextArea, 1));
+
+                item = new JMenuItem("Copiar");
+                this.popMenu.add(item);
+                item.addActionListener(new ActionListenerImpl(jTextArea, 2));
+
+                item = new JMenuItem("Pegar");
+                this.popMenu.add(item);
+                item.addActionListener(new ActionListenerImpl(jTextArea, 3));
+
+                this.popMenu.show(e.getComponent(), e.getX(), e.getY());
+            }
+        }
+
+        /**
+         * Evento de entrar en un componente con el puntero.
+         *
+         * @param e Evento de pulsar el raton
+         */
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        /**
+         * Evento de salir de un componente con el puntero.
+         *
+         * @param e Evento de pulsar el raton
+         */
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+        /**
+         * Listener de seleccionar un item
+         */
+        private static class ActionListenerImpl implements ActionListener {
+
+            private final javax.swing.JTextArea jTextArea;
+            private final int valor;
+
+            /**
+             * Consrucor parametrizado
+             *
+             * @param jT Caja de texto de la url
+             * @param valor
+             */
+            public ActionListenerImpl(javax.swing.JTextArea jT, int valor) {
+                this.jTextArea = jT;
+                this.valor = valor;
+            }
+
+            /**
+             * Evento de seleccionar el iem y decidir la acción correspondiene
+             *
+             * @param e Evento de seleccion del item
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (valor) {
+                    case 1: //Cortar
+                        this.jTextArea.cut();
+                        break;
+                    case 2: //Copiar
+                        this.jTextArea.copy();
+                        break;
+                    case 3: //Pegar
+                        this.jTextArea.paste();
+                        break;
+                }
             }
         }
     }
