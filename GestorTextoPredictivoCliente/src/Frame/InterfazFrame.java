@@ -5,9 +5,10 @@
  */
 package Frame;
 
-
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
@@ -17,8 +18,11 @@ import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import javax.swing.undo.UndoManager;
 import util.Configuracion;
 import util.PopUpMenu;
 import util.Posicion;
@@ -34,6 +38,8 @@ public class InterfazFrame extends javax.swing.JFrame {
     private final Configuracion config;
     private final ProtocoloConexion protocolo;
     private final PopUpMenu popUp;
+
+    private final UndoManager undo;
 
     /**
      * Creates new form Interfaz
@@ -58,6 +64,50 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo));
         this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
+
+        undo = new UndoManager();
+        botonDeshacer.setEnabled(false);
+        botonRehacer.setEnabled(false);
+        itemDeshacer.setEnabled(false);
+        itemRehacer.setEnabled(false);
+
+        this.jTextArea1.getDocument().addUndoableEditListener(new UndoableEditListener() {
+            @Override
+            public void undoableEditHappened(UndoableEditEvent uee) {
+                undo.addEdit(uee.getEdit());
+                actualizarBotones();
+            }
+        });
+
+        botonDeshacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                undo.undo();
+                actualizarBotones();
+            }
+        });
+        itemDeshacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                undo.undo();
+                actualizarBotones();
+            }
+        });
+
+        botonRehacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                undo.redo();
+                actualizarBotones();
+            }
+        });
+        itemRehacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                undo.redo();
+                actualizarBotones();
+            }
+        });
     }
 
     /**
@@ -71,6 +121,12 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jToolBar1 = new javax.swing.JToolBar();
+        botonNuevo = new javax.swing.JButton();
+        botonAbrir = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
+        botonGuardarComo = new javax.swing.JButton();
+        botonDeshacer = new javax.swing.JButton();
+        botonRehacer = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -84,7 +140,8 @@ public class InterfazFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        itemDeshacer = new javax.swing.JMenuItem();
+        itemRehacer = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -108,6 +165,42 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+
+        botonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.gif"))); // NOI18N
+        botonNuevo.setFocusable(false);
+        botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonNuevo);
+
+        botonAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/abrir.gif"))); // NOI18N
+        botonAbrir.setFocusable(false);
+        botonAbrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonAbrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonAbrir);
+
+        botonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.gif"))); // NOI18N
+        botonGuardar.setFocusable(false);
+        botonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonGuardar);
+
+        botonGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarComo.gif"))); // NOI18N
+        botonGuardarComo.setFocusable(false);
+        botonGuardarComo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonGuardarComo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonGuardarComo);
+
+        botonDeshacer.setText("Deshacer");
+        botonDeshacer.setFocusable(false);
+        botonDeshacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonDeshacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonDeshacer);
+
+        botonRehacer.setText("Rehacer");
+        botonRehacer.setFocusable(false);
+        botonRehacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonRehacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(botonRehacer);
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -170,9 +263,13 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         jMenu2.setText("Editar");
 
-        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem6.setText("Deshacer");
-        jMenu2.add(jMenuItem6);
+        itemDeshacer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        itemDeshacer.setText("Deshacer");
+        jMenu2.add(itemDeshacer);
+
+        itemRehacer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
+        itemRehacer.setText("Rehacer");
+        jMenu2.add(itemRehacer);
         jMenu2.add(jSeparator2);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
@@ -321,6 +418,14 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemGuardarComo;
+    private javax.swing.JButton botonAbrir;
+    private javax.swing.JButton botonDeshacer;
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonGuardarComo;
+    private javax.swing.JButton botonNuevo;
+    private javax.swing.JButton botonRehacer;
+    private javax.swing.JMenuItem itemDeshacer;
+    private javax.swing.JMenuItem itemRehacer;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -338,7 +443,6 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -356,7 +460,8 @@ public class InterfazFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Aplica una fuente al area de exto 
+     * Aplica una fuente al area de exto
+     *
      * @param f Nueva fuente
      */
     public void aplicarFormato(Font f) {
@@ -377,7 +482,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem3.setText(this.config.getPalabra(6));
         ItemGuardarComo.setText(this.config.getPalabra(7));
         jMenuItem5.setText(this.config.getPalabra(8));
-        jMenuItem6.setText(this.config.getPalabra(9));
+        itemDeshacer.setText(this.config.getPalabra(9));
         jMenuItem7.setText(this.config.getPalabra(10));
         jMenuItem8.setText(this.config.getPalabra(11));
         jMenuItem9.setText(this.config.getPalabra(12));
@@ -393,6 +498,13 @@ public class InterfazFrame extends javax.swing.JFrame {
         this.setTitle(this.config.getPalabra(34));
     }
 
+    private void actualizarBotones() {
+        botonDeshacer.setEnabled(this.undo.canUndo());
+        botonRehacer.setEnabled(this.undo.canRedo());
+        itemDeshacer.setEnabled(this.undo.canUndo());
+        itemRehacer.setEnabled(this.undo.canRedo());
+    }
+
     /**
      * Lisener de escriura en el area de texto
      */
@@ -405,6 +517,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         /**
          * Construcor paramerizado
+         *
          * @param pop PopUpMenu de sugerencias
          * @param p Objeo posición del caret
          * @param jt Area de texo sobre la que se escribe
@@ -419,6 +532,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         /**
          * Evento de pulsar y soltar una tecla que hace desaparecer el PopUpMenu
+         *
          * @param ke Evento de tecla
          */
         @Override
@@ -428,6 +542,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         /**
          * Evento de pulsar una tecla
+         *
          * @param ke Evento de tecla
          */
         @Override
@@ -437,6 +552,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         /**
          * Evento de soltar una tecla que solicia la prediccion
+         *
          * @param ke Evento de tecla
          */
         @Override
@@ -500,7 +616,8 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         /**
          * Consrucor paramerizado
-         * @param jt Area de texto 
+         *
+         * @param jt Area de texto
          * @param pos Posicion del care
          */
         CaretListenerImpl(JTextArea jt, Posicion pos) {
@@ -508,9 +625,9 @@ public class InterfazFrame extends javax.swing.JFrame {
             this.pos = pos;
         }
 
-        
         /**
          * Evento que almacena la nueva posición del care al cambiar.
+         *
          * @param e Evento del caret
          */
         @Override
