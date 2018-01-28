@@ -6,10 +6,7 @@
 package Frame;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -19,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import util.HiloLecturaFicheros;
 import util.ProtocoloConexion;
-import util.lecturaDatos;
 
 /**
  *

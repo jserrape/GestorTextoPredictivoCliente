@@ -73,7 +73,7 @@ public class ProtocoloConexion {
     /**
      * Envía la dirección mac del ordenar al servidor
      */
-    public void comunicarMac() {
+    private void comunicarMac() {
         try {
             config.getIn().readLine();
             System.out.println("Client: " + mac);
@@ -88,7 +88,7 @@ public class ProtocoloConexion {
      * Solicita al servidor la lisa de los dataSet asociados
      * @return Lisa de dataSets
      */
-    public String obtenerListaDataSet() {
+    private String obtenerListaDataSet() {
         try {
             config.getOut().println("1");
             String conjunos = config.getIn().readLine();
@@ -108,7 +108,7 @@ public class ProtocoloConexion {
      * @param nombre Nombre y características del dataSet
      * @return Lista de todos los dataSets 
      */
-    public String crearDataSet(String nombre) {
+    private String crearDataSet(String nombre) {
         config.getOut().println("2" + nombre);
         try {
             return config.getIn().readLine();
@@ -123,7 +123,7 @@ public class ProtocoloConexion {
      * @param nombre Nombre del dataSet a eliminar
      * @return Lista de todos los dataSets 
      */
-    public String eliminarDataSet(String nombre) {
+    private String eliminarDataSet(String nombre) {
         config.getOut().println("3" + nombre);
         try {
             return config.getIn().readLine();
@@ -137,7 +137,7 @@ public class ProtocoloConexion {
      * Solicita saber al servidor qué dataSet tiene cargado
      * @return DataSet cargado
      */
-    public String dataSetCargado() {
+    private String dataSetCargado() {
         config.getOut().println("4");
         try {
             return config.getIn().readLine();
@@ -152,7 +152,7 @@ public class ProtocoloConexion {
      * @param mensaje Nombre del dataSet a cargar
      * @return Nombre del dataSet que ha cargado
      */
-    public String cargarDataSet(String mensaje) {
+    private String cargarDataSet(String mensaje) {
         config.getOut().println("5" + mensaje);
         try {
             return config.getIn().readLine();
@@ -166,7 +166,7 @@ public class ProtocoloConexion {
      * Envia una cadena de texto al servidor para que la analice para fuuras predicciones.
      * @param mensaje Cadena de texto a analizar 
      */
-    public void enviarTexto(String mensaje) {
+    private void enviarTexto(String mensaje) {
         config.getOut().println("6" + mensaje);
     }
 
@@ -175,7 +175,7 @@ public class ProtocoloConexion {
      * @param mensaje Semilla de predicción
      * @return Array con las predicciones obenidas
      */
-    public String solicitarPrediccion(String mensaje) {
+    private String solicitarPrediccion(String mensaje) {
         config.getOut().println("7" + mensaje);
         try {
             return config.getIn().readLine();
@@ -188,7 +188,7 @@ public class ProtocoloConexion {
     /**
      * Se desconecta del servidor
      */
-    public void desconectar() {
+    private void desconectar() {
         try {
             config.getOut().close();
             config.getIn().close();
@@ -203,7 +203,7 @@ public class ProtocoloConexion {
      * Obtiene la direccion ip y mac del equipo
      * @return Direccion mac
      */
-    public static String getMac() {
+    private static String getMac() {
         InetAddress ip;
         try {
             ip = InetAddress.getLocalHost();

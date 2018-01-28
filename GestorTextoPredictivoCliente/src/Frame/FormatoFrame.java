@@ -377,7 +377,7 @@ public class FormatoFrame extends javax.swing.JDialog {
     /**
      * Establece el idioma indicado en la configuracion
      */
-    public void setIdiomaInterfaz() {
+    private void setIdiomaInterfaz() {
         this.setTitle(this.config.getPalabra(18));
         jLabel1.setText(this.config.getPalabra(25));
         jLabel2.setText(this.config.getPalabra(26));

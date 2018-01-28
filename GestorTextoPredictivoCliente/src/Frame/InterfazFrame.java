@@ -71,42 +71,27 @@ public class InterfazFrame extends javax.swing.JFrame {
         itemDeshacer.setEnabled(false);
         itemRehacer.setEnabled(false);
 
-        this.jTextArea1.getDocument().addUndoableEditListener(new UndoableEditListener() {
-            @Override
-            public void undoableEditHappened(UndoableEditEvent uee) {
-                undo.addEdit(uee.getEdit());
-                actualizarBotones();
-            }
+        this.jTextArea1.getDocument().addUndoableEditListener((UndoableEditEvent uee) -> {
+            undo.addEdit(uee.getEdit());
+            actualizarBotones();
         });
 
-        botonDeshacer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                undo.undo();
-                actualizarBotones();
-            }
+        botonDeshacer.addActionListener((ActionEvent ae) -> {
+            undo.undo();
+            actualizarBotones();
         });
-        itemDeshacer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                undo.undo();
-                actualizarBotones();
-            }
+        itemDeshacer.addActionListener((ActionEvent ae) -> {
+            undo.undo();
+            actualizarBotones();
         });
 
-        botonRehacer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                undo.redo();
-                actualizarBotones();
-            }
+        botonRehacer.addActionListener((ActionEvent ae) -> {
+            undo.redo();
+            actualizarBotones();
         });
-        itemRehacer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                undo.redo();
-                actualizarBotones();
-            }
+        itemRehacer.addActionListener((ActionEvent ae) -> {
+            undo.redo();
+            actualizarBotones();
         });
     }
 
@@ -125,6 +110,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonAbrir = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         botonGuardarComo = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        botonCortar = new javax.swing.JButton();
+        botonCopiar = new javax.swing.JButton();
+        botonPegar = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
         botonDeshacer = new javax.swing.JButton();
         botonRehacer = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
@@ -170,6 +160,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonNuevo.setFocusable(false);
         botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(botonNuevo);
 
         botonAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/abrir.gif"))); // NOI18N
@@ -189,14 +184,49 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonGuardarComo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonGuardarComo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(botonGuardarComo);
+        jToolBar1.add(jSeparator6);
 
-        botonDeshacer.setText("Deshacer");
+        botonCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cortar.png"))); // NOI18N
+        botonCortar.setFocusable(false);
+        botonCortar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCortar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonCortar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCortarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(botonCortar);
+
+        botonCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/copiar.png"))); // NOI18N
+        botonCopiar.setFocusable(false);
+        botonCopiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonCopiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCopiarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(botonCopiar);
+
+        botonPegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/pegar.png"))); // NOI18N
+        botonPegar.setFocusable(false);
+        botonPegar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonPegar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonPegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonPegarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(botonPegar);
+        jToolBar1.add(jSeparator7);
+
+        botonDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deshacer.png"))); // NOI18N
         botonDeshacer.setFocusable(false);
         botonDeshacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonDeshacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(botonDeshacer);
 
-        botonRehacer.setText("Rehacer");
+        botonRehacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rehacer.png"))); // NOI18N
         botonRehacer.setFocusable(false);
         botonRehacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonRehacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -415,14 +445,37 @@ public class InterfazFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
+    private void botonCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCortarActionPerformed
+        // TODO add your handling code here:
+        this.jTextArea1.cut();
+    }//GEN-LAST:event_botonCortarActionPerformed
+
+    private void botonCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCopiarActionPerformed
+        // TODO add your handling code here:
+        this.jTextArea1.copy();
+    }//GEN-LAST:event_botonCopiarActionPerformed
+
+    private void botonPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPegarActionPerformed
+        // TODO add your handling code here:
+        this.jTextArea1.paste();
+    }//GEN-LAST:event_botonPegarActionPerformed
+
+    private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
+        // TODO add your handling code here:
+        this.jTextArea1.setText("");
+    }//GEN-LAST:event_botonNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemGuardarComo;
     private javax.swing.JButton botonAbrir;
+    private javax.swing.JButton botonCopiar;
+    private javax.swing.JButton botonCortar;
     private javax.swing.JButton botonDeshacer;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonGuardarComo;
     private javax.swing.JButton botonNuevo;
+    private javax.swing.JButton botonPegar;
     private javax.swing.JButton botonRehacer;
     private javax.swing.JMenuItem itemDeshacer;
     private javax.swing.JMenuItem itemRehacer;
@@ -455,6 +508,8 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
