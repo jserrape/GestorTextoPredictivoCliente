@@ -168,11 +168,6 @@ public class ProtocoloConexion {
      */
     public void enviarTexto(String mensaje) {
         config.getOut().println("6" + mensaje);
-        try {
-            config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

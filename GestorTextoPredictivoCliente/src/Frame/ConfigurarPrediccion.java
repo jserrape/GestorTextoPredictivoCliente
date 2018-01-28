@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import util.HiloLecturaFicheros;
 import util.ProtocoloConexion;
 import util.lecturaDatos;
 
@@ -491,7 +492,17 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         }
         enviarTextos(ficheros, urls);
+        borrarTabla();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    /**
+     * Elimina todas la filas de la tabla
+     */
+    private void borrarTabla() {
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            this.modeloTabla.removeRow(i);
+        }
+    }
 
     /**
      * Solicitar al servidor cargar un conjunto de datos seleccionado
@@ -598,27 +609,16 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     }
 
     /**
-     * Envía los textos leidos al servidor
+     * Envía los ficheros a un hilo de lectura para transmitirselos al servidor
      *
      * @param ficheros Direcciones de los ficheros
      * @param urls Direcciones web
      */
     private void enviarTextos(ArrayList<String> ficheros, ArrayList<String> urls) {
         if (!ficheros.isEmpty() || !urls.isEmpty()) {
-            try {
-                lecturaDatos lectura = new lecturaDatos();
-                String texto;
-                for (int i = 0; i < ficheros.size(); i++) {
-                    texto = lectura.lectura("pdf", ficheros.get(i));
-                    this.protocolo.enviarMensaje(6, texto.toLowerCase().replaceAll("[^\\dA-Za-z.á-úÁ-Ú ]", ""));
-                }
-                for (int i = 0; i < urls.size(); i++) {
-                    texto = lectura.lectura("url", urls.get(i));
-                    this.protocolo.enviarMensaje(6, texto.toLowerCase().replaceAll("[^\\dA-Za-z.á-úÁ-Ú ]", ""));
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            HiloLecturaFicheros hilo=new HiloLecturaFicheros(this.protocolo,ficheros,urls);
+            Thread th=new Thread(hilo);
+            th.start();
         }
     }
 
