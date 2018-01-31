@@ -5,11 +5,15 @@
  */
 package Frame;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -115,8 +119,6 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         jLabel2.setText("Nombre del conjunto:");
 
-        jTextField2.setText("Nombre");
-
         jtSemilla.setModel(new javax.swing.SpinnerNumberModel(3, 1, 5, 1));
 
         jLabel3.setText("Tamaño máximo de la semilla");
@@ -213,17 +215,16 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtManPredicciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -566,6 +567,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         /////////////////////
         /////////////////////
+        jButton3.setEnabled(false);
         String cargado = this.protocolo.enviarMensaje(4, "");
         if ("-1".equals(cargado)) {
             jTextField1.setText("Ninguno");
@@ -589,6 +591,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             this.jList1.setModel(listModel);
             this.jList1.setSelectedIndex(0);
         }
+
+        this.jTextField2.addKeyListener(new KeyListenerImpl(this.jTextField2, jButton3));
     }
 
     /**
@@ -612,9 +616,44 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void enviarTextos(ArrayList<String> ficheros, ArrayList<String> urls) {
         if (!ficheros.isEmpty() || !urls.isEmpty()) {
-            HiloLecturaFicheros hilo=new HiloLecturaFicheros(this.protocolo,ficheros,urls);
-            Thread th=new Thread(hilo);
+            HiloLecturaFicheros hilo = new HiloLecturaFicheros(this.protocolo, ficheros, urls);
+            Thread th = new Thread(hilo);
             th.start();
+        }
+    }
+
+    private static class KeyListenerImpl implements KeyListener {
+
+        private final JTextField jt;
+        private final JButton boton;
+
+        public KeyListenerImpl(JTextField jt, JButton bot) {
+            this.jt = jt;
+            this.boton = bot;
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            if (e.getKeyChar() == '~' || e.getKeyChar() == '\\' || e.getKeyChar() == '/'
+                    || e.getKeyChar() == ':' || e.getKeyChar() == '*' || e.getKeyChar() == '?'
+                    || e.getKeyChar() == '"' || e.getKeyChar() == '<' || e.getKeyChar() == '>'
+                    || e.getKeyChar() == '|') {
+                e.consume();
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (!"".equals(this.jt.getText())) {
+                this.boton.setEnabled(true);
+            } else {
+                this.boton.setEnabled(false);
+            }
         }
     }
 

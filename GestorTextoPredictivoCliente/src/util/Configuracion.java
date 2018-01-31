@@ -38,7 +38,7 @@ public class Configuracion {
      */
     public Configuracion() {
         try {
-            kkSocket = new Socket("192.168.0.102", 4444);
+            kkSocket = new Socket("192.168.0.103", 4444);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(getKkSocket().getInputStream()));
             stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -65,6 +65,7 @@ public class Configuracion {
 
     /**
      * Devuelve una palabra especifica del array de palabras
+     *
      * @param i Posicion del array
      * @return Palabra de dicha posición
      */
@@ -90,6 +91,7 @@ public class Configuracion {
 
     /**
      * Carga el idioma indicado
+     *
      * @param idiom Nombre del fichero de idioma a cargar
      */
     public void cargarIdioma(String idiom) {

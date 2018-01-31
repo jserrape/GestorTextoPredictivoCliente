@@ -14,9 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-/*
-0   Solicitar lista de dataSets
- */
+
 /**
  *
  * @author jcsp0003
