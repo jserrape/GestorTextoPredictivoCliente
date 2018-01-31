@@ -41,11 +41,11 @@ import util.ProtocoloConexion;
 public class InterfazFrame extends javax.swing.JFrame {
 
     private Font font;
-    private final Configuracion config;
-    private final ProtocoloConexion protocolo;
-    private final PopUpMenu popUp;
+    private Configuracion config;
+    private ProtocoloConexion protocolo;
+    private PopUpMenu popUp;
 
-    private final UndoManager undo;
+    private UndoManager undo;
 
     /**
      * Creates new form Interfaz
@@ -56,52 +56,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     public InterfazFrame() throws BadLocationException, FileNotFoundException {
         initComponents();
         setLocationRelativeTo(null);
-
-        config = new Configuracion();
-        setIdiomaInterfaz();
-        protocolo = new ProtocoloConexion(config);
-
-        font = new Font("Arial", Font.PLAIN, 20);
-        this.jTextArea1.setFont(font);
-
-        this.popUp = new PopUpMenu(this.jPopupMenu1, this.jTextArea1);
-
-        Posicion posi = new Posicion();
-
-        this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo));
-        this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
-
-        this.jTextArea1.addMouseListener(new MouseListenerImpl(this.jPopupMenu2, this.jTextArea1));
-
-        //Para rehacer y deshacer
-        undo = new UndoManager();
-        botonDeshacer.setEnabled(false);
-        botonRehacer.setEnabled(false);
-        itemDeshacer.setEnabled(false);
-        itemRehacer.setEnabled(false);
-
-        this.jTextArea1.getDocument().addUndoableEditListener((UndoableEditEvent uee) -> {
-            undo.addEdit(uee.getEdit());
-            actualizarBotones();
-        });
-
-        botonDeshacer.addActionListener((ActionEvent ae) -> {
-            undo.undo();
-            actualizarBotones();
-        });
-        itemDeshacer.addActionListener((ActionEvent ae) -> {
-            undo.undo();
-            actualizarBotones();
-        });
-
-        botonRehacer.addActionListener((ActionEvent ae) -> {
-            undo.redo();
-            actualizarBotones();
-        });
-        itemRehacer.addActionListener((ActionEvent ae) -> {
-            undo.redo();
-            actualizarBotones();
-        });
+        inicializar();
     }
 
     /**
@@ -601,6 +556,91 @@ public class InterfazFrame extends javax.swing.JFrame {
     public void aplicarFormato(Font f) {
         this.font = f;
         this.jTextArea1.setFont(font);
+    }
+
+    private void inicializar() {
+        config = new Configuracion();
+        setIdiomaInterfaz();
+        protocolo = new ProtocoloConexion(config);
+
+        font = new Font("Arial", Font.PLAIN, 20);
+        this.jTextArea1.setFont(font);
+
+        this.popUp = new PopUpMenu(this.jPopupMenu1, this.jTextArea1);
+
+        Posicion posi = new Posicion();
+
+        this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo));
+        this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
+        this.jTextArea1.addMouseListener(new MouseListenerImpl(this.jPopupMenu2, this.jTextArea1));
+
+        //Para rehacer y deshacer
+        undo = new UndoManager();
+        botonDeshacer.setEnabled(false);
+        botonRehacer.setEnabled(false);
+        itemDeshacer.setEnabled(false);
+        itemRehacer.setEnabled(false);
+
+        this.jTextArea1.getDocument().addUndoableEditListener((UndoableEditEvent uee) -> {
+            undo.addEdit(uee.getEdit());
+            actualizarBotones();
+        });
+
+        botonDeshacer.addActionListener((ActionEvent ae) -> {
+            undo.undo();
+            actualizarBotones();
+        });
+        itemDeshacer.addActionListener((ActionEvent ae) -> {
+            undo.undo();
+            actualizarBotones();
+        });
+
+        botonRehacer.addActionListener((ActionEvent ae) -> {
+            undo.redo();
+            actualizarBotones();
+        });
+        itemRehacer.addActionListener((ActionEvent ae) -> {
+            undo.redo();
+            actualizarBotones();
+        });
+
+        //Aumentar tamaño de la fuente
+        Font f = jMenu1.getFont();
+        Font ff = new Font(f.getFontName(), Font.PLAIN, f.getSize() + 1);
+        jMenu1.setFont(ff);
+        jMenu2.setFont(ff);
+        jMenu3.setFont(ff);
+        jMenu4.setFont(ff);
+
+        botonNuevo.setFont(ff);
+        botonAbrir.setFont(ff);
+        botonGuardar.setFont(ff);
+        botonGuardarComo.setFont(ff);
+        botonCortar.setFont(ff);
+        botonCopiar.setFont(ff);
+        botonPegar.setFont(ff);
+        botonDeshacer.setFont(ff);
+        botonRehacer.setFont(ff);
+        jMenuBar1.setFont(ff);
+        jMenuItemNuevo.setFont(ff);
+        jMenuItem2.setFont(ff);
+        jMenuItem3.setFont(ff);
+        ItemGuardarComo.setFont(ff);
+        jMenuItem5.setFont(ff);
+        itemDeshacer.setFont(ff);
+        itemRehacer.setFont(ff);
+        itemCortar.setFont(ff);
+        itemCopiar.setFont(ff);
+        itemPegar.setFont(ff);
+        jMenuItem10.setFont(ff);
+        jMenuItem11.setFont(ff);
+        jMenuItem13.setFont(ff);
+        itemSeleccionarTodo.setFont(ff);
+        itemFechaHora.setFont(ff);
+        jMenuItem17.setFont(ff);
+        jMenuItem18.setFont(ff);
+        jMenuItem19.setFont(ff);
+        jMenuItem1.setFont(ff);
     }
 
     /**

@@ -33,7 +33,7 @@ public class HiloLecturaFicheros implements Runnable {
         try {
             for (int i = 0; i < ficheros.size(); i++) {
                 texto = lectura.lectura("pdf", ficheros.get(i));
-                this.protocolo.enviarMensaje(6, texto.toLowerCase().replaceAll("[^\\dA-Za-z.á-úÁ-Ú ]", ""));
+                this.protocolo.enviarMensaje(6, texto.replaceAll(":", ".").toLowerCase().replaceAll("[^\\dA-Za-z.,()á-úÁ-Ú ]", ""));
             }
             for (int i = 0; i < urls.size(); i++) {
                 texto = lectura.lectura("url", urls.get(i));
