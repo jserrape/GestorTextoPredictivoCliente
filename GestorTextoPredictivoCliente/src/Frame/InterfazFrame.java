@@ -148,6 +148,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonGuardarComo.setFocusable(false);
         botonGuardarComo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonGuardarComo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarComoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(botonGuardarComo);
         jToolBar1.add(jSeparator6);
 
@@ -411,7 +416,8 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemPegarActionPerformed
 
     private void ItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarComoActionPerformed
-
+        FileChooserFrame fc=new FileChooserFrame(this,true,this.jTextArea1,3);
+        fc.setVisible(true);
     }//GEN-LAST:event_ItemGuardarComoActionPerformed
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
@@ -497,6 +503,12 @@ public class InterfazFrame extends javax.swing.JFrame {
         ReemplazarFrame ree = new ReemplazarFrame(this, true, this.jTextArea1);
         ree.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void botonGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarComoActionPerformed
+        // TODO add your handling code here:
+        FileChooserFrame fc=new FileChooserFrame(this,true,this.jTextArea1,3);
+        fc.setVisible(true);
+    }//GEN-LAST:event_botonGuardarComoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
