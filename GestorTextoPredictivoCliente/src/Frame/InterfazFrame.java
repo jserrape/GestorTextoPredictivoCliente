@@ -136,6 +136,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonAbrir.setFocusable(false);
         botonAbrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonAbrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAbrirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(botonAbrir);
 
         botonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.gif"))); // NOI18N
@@ -234,6 +239,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/abrir.gif"))); // NOI18N
         jMenuItem2.setText("Abrir...");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
@@ -416,7 +426,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemPegarActionPerformed
 
     private void ItemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemGuardarComoActionPerformed
-        FileChooserFrame fc=new FileChooserFrame(this,true,this.jTextArea1,3);
+        FileChooserFrame fc = new FileChooserFrame(this, true, this.jTextArea1, 3);
         fc.setVisible(true);
     }//GEN-LAST:event_ItemGuardarComoActionPerformed
 
@@ -506,9 +516,19 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     private void botonGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarComoActionPerformed
         // TODO add your handling code here:
-        FileChooserFrame fc=new FileChooserFrame(this,true,this.jTextArea1,3);
+        FileChooserFrame fc = new FileChooserFrame(this, true, this.jTextArea1, 3);
         fc.setVisible(true);
     }//GEN-LAST:event_botonGuardarComoActionPerformed
+
+    private void botonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAbrirActionPerformed
+        FileChooserFrame fc = new FileChooserFrame(this, true, this.jTextArea1, 1);
+        fc.setVisible(true);
+    }//GEN-LAST:event_botonAbrirActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FileChooserFrame fc = new FileChooserFrame(this, true, this.jTextArea1, 1);
+        fc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
