@@ -402,9 +402,17 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * @param evt Accion del boton
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String textoAEnviar = jTextField2.getText() + "#" + jComboBox1.getSelectedItem().toString() + "#" + (int) jtSemilla.getValue()
-                + "#" + jMinSemilla.getValue() + "#" + (int) jtamPrediccion.getValue()
+        int tMax = (int) jtSemilla.getValue();
+        int tMin = (int) jMinSemilla.getValue();
+        if (tMax < tMin) {
+            int aux = tMax;
+            tMax = tMin;
+            tMin = aux;
+        }
+        String textoAEnviar = jTextField2.getText() + "#" + jComboBox1.getSelectedItem().toString() + "#" + tMax
+                + "#" + tMin + "#" + (int) jtamPrediccion.getValue()
                 + "#" + (int) jtManPredicciones.getValue();
+
         System.out.println("Conjunto a crear:" + textoAEnviar);
         String lista = this.protocolo.enviarMensaje(2, textoAEnviar);
 
@@ -527,17 +535,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         }
         enviarTextos(ficheros, urls);
-        borrarTabla();
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    /**
-     * Elimina todas la filas de la tabla
-     */
-    private void borrarTabla() {
-        for (int i = 0; i < modeloTablaFicheros.getRowCount(); i++) {
-            this.modeloTablaFicheros.removeRow(i);
-        }
-    }
 
     /**
      * Solicitar al servidor cargar un conjunto de datos seleccionado
@@ -545,13 +544,15 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * @param evt Accion del boton
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextField1.setText(this.protocolo.enviarMensaje(5, this.modeloTablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString()));
-        jButton4.setEnabled(true);
-        jButton5.setEnabled(true);
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
-        jButton8.setEnabled(true);
-        jLabel7.setVisible(false);
+        if (this.tablaConjuntos.getSelectedRow() != -1) {
+            jTextField1.setText(this.protocolo.enviarMensaje(5, this.modeloTablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString()));
+            jButton4.setEnabled(true);
+            jButton5.setEnabled(true);
+            jButton6.setEnabled(true);
+            jButton7.setEnabled(true);
+            jButton8.setEnabled(true);
+            jLabel7.setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -644,6 +645,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             jLabel7.setVisible(true);
         } else {
             jTextField1.setText(cargado);
+            jLabel7.setVisible(false);
         }
         String lista = this.protocolo.enviarMensaje(1, "");
         if (!"".equals(lista)) {
