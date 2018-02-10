@@ -20,11 +20,9 @@ import java.util.logging.Logger;
 public class ProtocoloConexion {
 
     private final Configuracion config;
-    private final String mac;
 
     public ProtocoloConexion(Configuracion conf) {
         this.config = conf;
-        this.mac = getMac();
     }
 
     /**
@@ -37,7 +35,7 @@ public class ProtocoloConexion {
      * @param mensaje Mensaje que envía al servidor
      * @return Respuesa del servidor
      */
-    public String enviarMensaje(int cod, String mensaje) {
+    public String enviarMensaje(int cod, String mensaje) throws IOException {
         switch (cod) {
             case 0:
                 desconectar();
@@ -65,38 +63,20 @@ public class ProtocoloConexion {
         return "";
     }
 
-    /**
-     * Envía la dirección mac del ordenar al servidor
-     */
-    private void comunicarMac() {
-        try {
-            config.getIn().readLine();
-            System.out.println("Client: " + mac);
-            config.getOut().println(mac);
-            config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     /**
      * Solicita al servidor la lisa de los dataSet asociados
      *
      * @return Lisa de dataSets
      */
-    private String obtenerListaDataSet() {
-        try {
-            config.getOut().println("1");
-            String conjunos = config.getIn().readLine();
-            if (!"-1".equals(conjunos)) {
-                return conjunos;
-            } else {
-                return "";
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
+    private String obtenerListaDataSet() throws IOException {
+        config.getOut().println("1");
+        String conjunos = config.getIn().readLine();
+        if (!"-1".equals(conjunos)) {
+            return conjunos;
+        } else {
+            return "";
         }
-        return "";
     }
 
     /**
@@ -105,14 +85,9 @@ public class ProtocoloConexion {
      * @param nombre Nombre y características del dataSet
      * @return Lista de todos los dataSets
      */
-    private String crearDataSet(String nombre) {
+    private String crearDataSet(String nombre) throws IOException {
         config.getOut().println("2" + nombre);
-        try {
-            return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
+        return config.getIn().readLine();
     }
 
     /**
@@ -121,14 +96,9 @@ public class ProtocoloConexion {
      * @param nombre Nombre del dataSet a eliminar
      * @return Lista de todos los dataSets
      */
-    private String eliminarDataSet(String nombre) {
+    private String eliminarDataSet(String nombre) throws IOException {
         config.getOut().println("3" + nombre);
-        try {
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
     }
 
     /**
@@ -136,14 +106,9 @@ public class ProtocoloConexion {
      *
      * @return DataSet cargado
      */
-    private String dataSetCargado() {
+    private String dataSetCargado() throws IOException {
         config.getOut().println("4");
-        try {
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "-1";
     }
 
     /**
@@ -152,14 +117,9 @@ public class ProtocoloConexion {
      * @param mensaje Nombre del dataSet a cargar
      * @return Nombre del dataSet que ha cargado
      */
-    private String cargarDataSet(String mensaje) {
+    private String cargarDataSet(String mensaje) throws IOException {
         config.getOut().println("5" + mensaje);
-        try {
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "Ninguno";
     }
 
     /**
@@ -178,71 +138,32 @@ public class ProtocoloConexion {
      * @param mensaje Semilla de predicción
      * @return Array con las predicciones obenidas
      */
-    private String solicitarPrediccion(String mensaje) {
+    private String solicitarPrediccion(String mensaje) throws IOException {
         config.getOut().println("7" + mensaje);
-        try {
+
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
     }
 
     /**
      * Se desconecta del servidor
      */
-    public void desconectar() {
-        try {
+    public void desconectar() throws IOException {
             config.getOut().println("0");
             config.getOut().close();
             config.getIn().close();
             config.getStdIn().close();
             config.getKkSocket().close();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
-    private String login(String mensaje) {
+    private String login(String mensaje) throws IOException {
         config.getOut().println("8" + mensaje);
-        try {
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "-1";
     }
 
-    private String registro(String mensaje) {
+    private String registro(String mensaje) throws IOException {
         config.getOut().println("9" + mensaje);
-        try {
+
             return config.getIn().readLine();
-        } catch (IOException ex) {
-            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "-1";
     }
 
-    /**
-     * Obtiene la direccion ip y mac del equipo
-     *
-     * @return Direccion mac
-     */
-    private static String getMac() {
-        InetAddress ip;
-        try {
-            ip = InetAddress.getLocalHost();
-            System.out.println("Current IP address : " + ip.getHostAddress());
-            NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-            byte[] mac = network.getHardwareAddress();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < mac.length; i++) {
-                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
-            }
-            return sb.toString();
-        } catch (UnknownHostException | SocketException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
-    }
 }

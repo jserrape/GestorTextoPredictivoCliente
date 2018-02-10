@@ -32,6 +32,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     private final ProtocoloConexion protocolo;
     private DefaultTableModel modeloTablaFicheros;
     private DefaultTableModel modeloTablaConjuntos;
+    private final InterfazFrame interfaz;
 
     /**
      * Constructor parametrizado de la clase ConfigurarPrediccion
@@ -40,12 +41,13 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * @param modal
      * @param protocol
      */
-    public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol) {
+    public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
 
         this.protocolo = protocol;
+        this.interfaz = interf;
 
         configuracionInicial();
     }
@@ -367,32 +369,38 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
             System.out.println(this.tablaConjuntos.getSelectedRow());
-            String lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
-            System.out.println("Lista: " + lista);
-            this.modeloTablaConjuntos = new DefaultTableModel();
-            this.modeloTablaConjuntos.addColumn("Nombre");
-            this.modeloTablaConjuntos.addColumn("Idioma");
-            this.tablaConjuntos.setModel(modeloTablaConjuntos);
-            if (!"".equals(lista)) {
-                System.out.println(lista);
-                if (!"-1".equals(lista)) {
-                    lista = lista.substring(1, lista.length() - 1);
-                    String[] parts = lista.split(", ");
-                    String[] part2;
-                    for (String part : parts) {
-                        part2 = part.split("#");
-                        this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+            String lista;
+            try {
+                lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
+                System.out.println("Lista: " + lista);
+                this.modeloTablaConjuntos = new DefaultTableModel();
+                this.modeloTablaConjuntos.addColumn("Nombre");
+                this.modeloTablaConjuntos.addColumn("Idioma");
+                this.tablaConjuntos.setModel(modeloTablaConjuntos);
+                if (!"".equals(lista)) {
+                    System.out.println(lista);
+                    if (!"-1".equals(lista)) {
+                        lista = lista.substring(1, lista.length() - 1);
+                        String[] parts = lista.split(", ");
+                        String[] part2;
+                        for (String part : parts) {
+                            part2 = part.split("#");
+                            this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+                        }
+                        this.tablaConjuntos.setRowSelectionInterval(0, 0);
                     }
-                    this.tablaConjuntos.setRowSelectionInterval(0, 0);
                 }
+                jTextField1.setText("Ninguno");
+                jButton4.setEnabled(false);
+                jButton5.setEnabled(false);
+                jButton6.setEnabled(false);
+                jButton7.setEnabled(false);
+                jButton8.setEnabled(false);
+                jLabel7.setVisible(true);
+            } catch (IOException ex) {
+                this.interfaz.errorConexion();
+                Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
-            jTextField1.setText("Ninguno");
-            jButton4.setEnabled(false);
-            jButton5.setEnabled(false);
-            jButton6.setEnabled(false);
-            jButton7.setEnabled(false);
-            jButton8.setEnabled(false);
-            jLabel7.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -414,24 +422,31 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 + "#" + (int) jtManPredicciones.getValue();
 
         System.out.println("Conjunto a crear:" + textoAEnviar);
-        String lista = this.protocolo.enviarMensaje(2, textoAEnviar);
-        System.out.println("lista:"+lista);
-        this.modeloTablaConjuntos = new DefaultTableModel();
-        this.modeloTablaConjuntos.addColumn("Nombre");
-        this.modeloTablaConjuntos.addColumn("Idioma");
-        this.tablaConjuntos.setModel(modeloTablaConjuntos);
-        jTextField2.setText("");
-        jButton3.setEnabled(false);
+        String lista;
+        try {
+            lista = this.protocolo.enviarMensaje(2, textoAEnviar);
 
-        if (!"".equals(lista)) {
-            lista = lista.substring(1, lista.length() - 1);
-            String[] parts = lista.split(", ");
-            String[] part2;
-            for (String part : parts) {
-                part2 = part.split("#");
-                this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+            System.out.println("lista:" + lista);
+            this.modeloTablaConjuntos = new DefaultTableModel();
+            this.modeloTablaConjuntos.addColumn("Nombre");
+            this.modeloTablaConjuntos.addColumn("Idioma");
+            this.tablaConjuntos.setModel(modeloTablaConjuntos);
+            jTextField2.setText("");
+            jButton3.setEnabled(false);
+
+            if (!"".equals(lista)) {
+                lista = lista.substring(1, lista.length() - 1);
+                String[] parts = lista.split(", ");
+                String[] part2;
+                for (String part : parts) {
+                    part2 = part.split("#");
+                    this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+                }
+                this.tablaConjuntos.setRowSelectionInterval(0, 0);
             }
-            this.tablaConjuntos.setRowSelectionInterval(0, 0);
+        } catch (IOException ex) {
+            this.interfaz.errorConexion();
+            Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -545,13 +560,18 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
-            jTextField1.setText(this.protocolo.enviarMensaje(5, this.modeloTablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString()));
-            jButton4.setEnabled(true);
-            jButton5.setEnabled(true);
-            jButton6.setEnabled(true);
-            jButton7.setEnabled(true);
-            jButton8.setEnabled(true);
-            jLabel7.setVisible(false);
+            try {
+                jTextField1.setText(this.protocolo.enviarMensaje(5, this.modeloTablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString()));
+                jButton4.setEnabled(true);
+                jButton5.setEnabled(true);
+                jButton6.setEnabled(true);
+                jButton7.setEnabled(true);
+                jButton8.setEnabled(true);
+                jLabel7.setVisible(false);
+            } catch (IOException ex) {
+                this.interfaz.errorConexion();
+                Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -634,35 +654,47 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         /////////////////////
         /////////////////////
         jButton3.setEnabled(false);
-        String cargado = this.protocolo.enviarMensaje(4, "");
-        if ("-1".equals(cargado)) {
-            jTextField1.setText("Ninguno");
-            jButton4.setEnabled(false);
-            jButton5.setEnabled(false);
-            jButton6.setEnabled(false);
-            jButton7.setEnabled(false);
-            jButton8.setEnabled(false);
-            jLabel7.setVisible(true);
-        } else {
-            jTextField1.setText(cargado);
-            jLabel7.setVisible(false);
-        }
-        String lista = this.protocolo.enviarMensaje(1, "");
-        if (!"".equals(lista)) {
-            for (int i = 0; i < this.modeloTablaConjuntos.getRowCount(); i++) {
-                this.modeloTablaConjuntos.removeRow(i);
+        String cargado;
+        try {
+            cargado = this.protocolo.enviarMensaje(4, "");
+            if ("-1".equals(cargado)) {
+                jTextField1.setText("Ninguno");
+                jButton4.setEnabled(false);
+                jButton5.setEnabled(false);
+                jButton6.setEnabled(false);
+                jButton7.setEnabled(false);
+                jButton8.setEnabled(false);
+                jLabel7.setVisible(true);
+            } else {
+                jTextField1.setText(cargado);
+                jLabel7.setVisible(false);
             }
-            lista = lista.substring(1, lista.length() - 1);
-            String[] parts = lista.split(", ");
-            String[] part2;
-            for (String part : parts) {
-                part2 = part.split("#");
-                this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
-            }
-            this.tablaConjuntos.setRowSelectionInterval(0, 0);
+        } catch (IOException ex) {
+            this.interfaz.errorConexion();
+            Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        this.jTextField2.addKeyListener(new KeyListenerImpl(this.jTextField2, jButton3));
+        String lista;
+        try {
+            lista = this.protocolo.enviarMensaje(1, "");
+            if (!"".equals(lista)) {
+                for (int i = 0; i < this.modeloTablaConjuntos.getRowCount(); i++) {
+                    this.modeloTablaConjuntos.removeRow(i);
+                }
+                lista = lista.substring(1, lista.length() - 1);
+                String[] parts = lista.split(", ");
+                String[] part2;
+                for (String part : parts) {
+                    part2 = part.split("#");
+                    this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+                }
+                this.tablaConjuntos.setRowSelectionInterval(0, 0);
+            }
+            this.jTextField2.addKeyListener(new KeyListenerImpl(this.jTextField2, jButton3));
+        } catch (IOException ex) {
+            this.interfaz.errorConexion();
+            Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

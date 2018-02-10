@@ -7,6 +7,10 @@ package Frame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import util.ProtocoloConexion;
 
@@ -27,13 +31,13 @@ public class LoginFrame extends javax.swing.JDialog {
      * @param protocolo
      * @param inter
      */
-    public LoginFrame(java.awt.Frame parent, boolean modal, ProtocoloConexion protocolo,InterfazFrame inter) {
+    public LoginFrame(java.awt.Frame parent, boolean modal, ProtocoloConexion protocolo, InterfazFrame inter) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
 
         this.protocolo = protocolo;
-        this.interfaz=inter;
+        this.interfaz = inter;
         jButton3.setEnabled(false);
         jButton1.setEnabled(false);
         jLabel7.setVisible(false);
@@ -249,12 +253,17 @@ public class LoginFrame extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String aux = this.protocolo.enviarMensaje(9, this.fieldNombre.getText() + "#" + this.fieldApellidos.getText() + "#" + this.fieldMail1.getText());
-        System.out.println("Aux:" + aux);
-        if ("-1".equals(aux)) {
-            jLabel7.setVisible(true);
-        } else {
-            this.dispose();
+        try {
+            String aux = this.protocolo.enviarMensaje(9, this.fieldNombre.getText() + "#" + this.fieldApellidos.getText() + "#" + this.fieldMail1.getText());
+            System.out.println("Aux:" + aux);
+            if ("-1".equals(aux)) {
+                jLabel7.setVisible(true);
+            } else {
+                this.dispose();
+            }
+        } catch (IOException ex) {
+            this.interfaz.errorConexion();
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -267,13 +276,18 @@ public class LoginFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String aux = this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + jTextField2.getText());
-        System.out.println("Aux:" + aux);
-        if ("-1".equals(aux)) {
-            jLabel8.setVisible(true);
-        } else {
-            this.interfaz.logear();
+        try {
+            if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + jTextField2.getText()))) {
+                jLabel8.setVisible(true);
+            } else {
+                this.interfaz.logear();
+                this.dispose();
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Eggs are not supposed to be green.", "Inane error", JOptionPane.ERROR_MESSAGE);
+            this.interfaz.errorConexion();
             this.dispose();
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

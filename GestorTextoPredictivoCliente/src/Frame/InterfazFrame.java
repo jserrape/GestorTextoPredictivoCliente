@@ -21,8 +21,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JPopupMenu.Separator;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -88,7 +90,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonDeshacer = new javax.swing.JButton();
         botonRehacer = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
-        jButton1 = new javax.swing.JButton();
+        botonError = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -217,16 +219,16 @@ public class InterfazFrame extends javax.swing.JFrame {
         jToolBar1.add(botonRehacer);
         jToolBar1.add(jSeparator8);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/advertencia.png"))); // NOI18N
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonError.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/advertencia.png"))); // NOI18N
+        botonError.setFocusable(false);
+        botonError.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonError.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonError.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonErrorActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(botonError);
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -465,8 +467,13 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemNuevoActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        this.protocolo.enviarMensaje(8, "");
-        this.dispose();
+        try {
+            this.protocolo.enviarMensaje(8, "");
+            this.dispose();
+        } catch (IOException ex) {
+            this.errorConexion();
+            Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -476,7 +483,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         if (registrado) {
-            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
+            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo, this);
             conf.setVisible(true);
         } else {
             LoginFrame log = new LoginFrame(this, true, this.protocolo, this);
@@ -562,9 +569,9 @@ public class InterfazFrame extends javax.swing.JFrame {
         fc.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonErrorActionPerformed
         this.config.conectar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonErrorActionPerformed
 
     private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionActionPerformed
         this.registrado = false;
@@ -579,6 +586,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JButton botonCopiar;
     private javax.swing.JButton botonCortar;
     private javax.swing.JButton botonDeshacer;
+    private javax.swing.JButton botonError;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonGuardarComo;
     private javax.swing.JButton botonNuevo;
@@ -592,7 +600,6 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemPegar;
     private javax.swing.JMenuItem itemRehacer;
     private javax.swing.JMenuItem itemSeleccionarTodo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -649,17 +656,19 @@ public class InterfazFrame extends javax.swing.JFrame {
     }
 
     public void conexionCorrecta() {
-        jButton1.setVisible(false);
+        botonError.setVisible(false);
     }
 
     public void errorConexion() {
-        jButton1.setVisible(true);
+        botonError.setVisible(true);
+        itemCerrarSesion.setVisible(false);
+        separadorSesion.setVisible(false);
     }
 
     private void inicializar() {
         itemCerrarSesion.setVisible(false);
         separadorSesion.setVisible(false);
-        jButton1.setVisible(false);
+        botonError.setVisible(false);
         config = new Configuracion(this);
         setIdiomaInterfaz();
         registrado = false;
@@ -672,7 +681,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         Posicion posi = new Posicion();
 
-        this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo));
+        this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo, botonError, itemCerrarSesion, separadorSesion));
         this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
         this.jTextArea1.addMouseListener(new MouseListenerImpl(this.jPopupMenu2, this.jTextArea1));
 
@@ -790,6 +799,9 @@ public class InterfazFrame extends javax.swing.JFrame {
         private final Posicion pos;
         private final JTextArea jt;
         private final ProtocoloConexion protocolo;
+        private final JButton botonError;
+        private final JMenuItem itemCerrarSesion;
+        private final Separator separadorSesion;
 
         /**
          * Construcor paramerizado
@@ -799,11 +811,14 @@ public class InterfazFrame extends javax.swing.JFrame {
          * @param jt Area de texo sobre la que se escribe
          * @param prot Proocolo de conexion
          */
-        public KeyListenerImpl(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot) {
+        public KeyListenerImpl(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot, JButton botonError, JMenuItem itemCerrarSesion, Separator separadorSesion) {
             this.popMenu = pop;
             this.pos = p;
             this.jt = jt;
             this.protocolo = prot;
+            this.botonError = botonError;
+            this.itemCerrarSesion = itemCerrarSesion;
+            this.separadorSesion = separadorSesion;
         }
 
         /**
@@ -863,22 +878,32 @@ public class InterfazFrame extends javax.swing.JFrame {
                     acabado = this.jt.getText().charAt(texto.length() - 1) == ' ';
                 }
 
-                String srtResultado;
-                //SACAR AQUI LA RESPUESTA DEL SERVIDOR
-                if (acabado) {
-                    srtResultado = this.protocolo.enviarMensaje(7, 1 + texto.toLowerCase());
-                } else {
-                    srtResultado = this.protocolo.enviarMensaje(7, 0 + texto.toLowerCase());
-                }
+                try {
+                    String srtResultado;
+                    //SACAR AQUI LA RESPUESTA DEL SERVIDOR
+                    if (acabado) {
+                        srtResultado = this.protocolo.enviarMensaje(7, 1 + texto.toLowerCase());
+                    } else {
+                        srtResultado = this.protocolo.enviarMensaje(7, 0 + texto.toLowerCase());
+                    }
 
-                if (srtResultado.length() > 2) {
-                    srtResultado = srtResultado.substring(1, srtResultado.length() - 1);
-                    this.popMenu.mostrar(ke, this.pos.getX(), this.pos.getY(), srtResultado);
-                } else {
-                    this.popMenu.desaparecer();
+                    if (srtResultado.length() > 2) {
+                        srtResultado = srtResultado.substring(1, srtResultado.length() - 1);
+                        this.popMenu.mostrar(ke, this.pos.getX(), this.pos.getY(), srtResultado);
+                    } else {
+                        this.popMenu.desaparecer();
+                    }
+                } catch (IOException ex) {
+                    errorConexion();
+                    Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
 
+        public void errorConexion() {
+            botonError.setVisible(true);
+            itemCerrarSesion.setVisible(false);
+            separadorSesion.setVisible(false);
         }
     }
 
@@ -1057,7 +1082,11 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         @Override
         public void windowClosing(java.awt.event.WindowEvent evt) {
-            this.protocolo.enviarMensaje(0, "");
+            try {
+                this.protocolo.enviarMensaje(0, "");
+            } catch (IOException ex) {
+                Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
