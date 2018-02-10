@@ -5,6 +5,7 @@
  */
 package util;
 
+import Frame.InterfazFrame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,7 +15,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +28,7 @@ import java.util.logging.Logger;
  */
 public class Configuracion {
 
-    private Socket kkSocket;
+    private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
     private BufferedReader stdIn;
@@ -33,17 +36,31 @@ public class Configuracion {
     private String idioma;
     private ArrayList<String> palabras;
 
+    private final InterfazFrame interfaz;
+
     /**
      * Constructor por defecto
+     *
+     * @param interfaz
      */
-    public Configuracion() {
+    public Configuracion(InterfazFrame interfaz) {
+        this.interfaz = interfaz;
+        conectar();
+    }
+
+    public void conectar() {
+        cargarConf();
         try {
-            kkSocket = new Socket("192.168.0.100", 4444);
+            SocketAddress sockaddr = new InetSocketAddress("192.168.0.100", 4444);
+            socket = new Socket();
+            socket.connect(sockaddr, 2000);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(getKkSocket().getInputStream()));
             stdIn = new BufferedReader(new InputStreamReader(System.in));
-            cargarConf();
+            this.interfaz.conexionCorrecta();
         } catch (IOException ex) {
+            System.out.println("FALLO AL CONECTAR CON EL SERVIDOR");
+            this.interfaz.errorConexion();
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -123,7 +140,7 @@ public class Configuracion {
      * @return the kkSocket
      */
     public Socket getKkSocket() {
-        return kkSocket;
+        return socket;
     }
 
     /**

@@ -61,7 +61,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         inicializar();
 
-        addWindowListener(new listenerCerrarVenana(protocolo));
+        //addWindowListener(new listenerCerrarVenana(protocolo));
     }
 
     /**
@@ -87,6 +87,8 @@ public class InterfazFrame extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JToolBar.Separator();
         botonDeshacer = new javax.swing.JButton();
         botonRehacer = new javax.swing.JButton();
+        jSeparator8 = new javax.swing.JToolBar.Separator();
+        jButton1 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -97,6 +99,8 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         ItemGuardarComo = new javax.swing.JMenuItem();
+        separadorSesion = new javax.swing.JPopupMenu.Separator();
+        itemCerrarSesion = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -211,6 +215,18 @@ public class InterfazFrame extends javax.swing.JFrame {
         botonRehacer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonRehacer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(botonRehacer);
+        jToolBar1.add(jSeparator8);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/advertencia.png"))); // NOI18N
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -264,6 +280,15 @@ public class InterfazFrame extends javax.swing.JFrame {
             }
         });
         jMenu1.add(ItemGuardarComo);
+        jMenu1.add(separadorSesion);
+
+        itemCerrarSesion.setText("Cerrar sesión");
+        itemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCerrarSesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemCerrarSesion);
         jMenu1.add(jSeparator1);
 
         jMenuItem5.setText("Salir");
@@ -513,19 +538,16 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemSeleccionarTodoActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        // TODO add your handling code here:
         BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1);
         buscar.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
         ReemplazarFrame ree = new ReemplazarFrame(this, true, this.jTextArea1);
         ree.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void botonGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarComoActionPerformed
-        // TODO add your handling code here:
         FileChooserFrame fc = new FileChooserFrame(this, true, this.jTextArea1, 3);
         fc.setVisible(true);
     }//GEN-LAST:event_botonGuardarComoActionPerformed
@@ -540,6 +562,16 @@ public class InterfazFrame extends javax.swing.JFrame {
         fc.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.config.conectar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionActionPerformed
+        this.registrado = false;
+        itemCerrarSesion.setVisible(false);
+        separadorSesion.setVisible(false);
+    }//GEN-LAST:event_itemCerrarSesionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemGuardarComo;
@@ -552,6 +584,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevo;
     private javax.swing.JButton botonPegar;
     private javax.swing.JButton botonRehacer;
+    private javax.swing.JMenuItem itemCerrarSesion;
     private javax.swing.JMenuItem itemCopiar;
     private javax.swing.JMenuItem itemCortar;
     private javax.swing.JMenuItem itemDeshacer;
@@ -559,6 +592,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemPegar;
     private javax.swing.JMenuItem itemRehacer;
     private javax.swing.JMenuItem itemSeleccionarTodo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -586,8 +620,10 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
+    private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPopupMenu.Separator separadorSesion;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -602,14 +638,29 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     public void logear() {
         this.registrado = true;
+        itemCerrarSesion.setVisible(true);
+        separadorSesion.setVisible(true);
     }
 
     public void deslogear() {
         this.registrado = false;
+        itemCerrarSesion.setVisible(false);
+        separadorSesion.setVisible(false);
+    }
+
+    public void conexionCorrecta() {
+        jButton1.setVisible(false);
+    }
+
+    public void errorConexion() {
+        jButton1.setVisible(true);
     }
 
     private void inicializar() {
-        config = new Configuracion();
+        itemCerrarSesion.setVisible(false);
+        separadorSesion.setVisible(false);
+        jButton1.setVisible(false);
+        config = new Configuracion(this);
         setIdiomaInterfaz();
         registrado = false;
         protocolo = new ProtocoloConexion(config);
@@ -999,9 +1050,9 @@ public class InterfazFrame extends javax.swing.JFrame {
     private static class listenerCerrarVenana extends WindowAdapter {
 
         private ProtocoloConexion protocolo;
-        
+
         public listenerCerrarVenana(ProtocoloConexion protocolo) {
-            this.protocolo=protocolo;
+            this.protocolo = protocolo;
         }
 
         @Override
