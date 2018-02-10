@@ -59,11 +59,9 @@ public class ProtocoloConexion {
             case 7:
                 return this.solicitarPrediccion(mensaje);
             case 8:
-                desconectar();
-                break;
+                return login(mensaje);
             case 9:
-                registro(mensaje);
-                break;
+                return registro(mensaje);
         }
         return "";
     }
@@ -206,8 +204,24 @@ public class ProtocoloConexion {
         }
     }
 
-    private void registro(String mensaje) {
+    private String login(String mensaje) {
+        config.getOut().println("8" + mensaje);
+        try {
+            return config.getIn().readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "-1";
+    }
+
+    private String registro(String mensaje) {
         config.getOut().println("9" + mensaje);
+        try {
+            return config.getIn().readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "-1";
     }
 
     /**

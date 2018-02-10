@@ -451,7 +451,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
         conf.setVisible(true);
         }else{
-            LoginFrame log=new LoginFrame(this,true,this.protocolo);
+            LoginFrame log=new LoginFrame(this,true,this.protocolo,this);
             log.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
@@ -597,6 +597,14 @@ public class InterfazFrame extends javax.swing.JFrame {
         this.jTextArea1.setFont(font);
     }
 
+    public void logear(){
+        this.registrado=true;
+    }
+    
+    public void deslogear(){
+        this.registrado=false;
+    }
+    
     private void inicializar() {
         config = new Configuracion();
         setIdiomaInterfaz();

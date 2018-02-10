@@ -38,7 +38,7 @@ public class Configuracion {
      */
     public Configuracion() {
         try {
-            kkSocket = new Socket("192.168.0.104", 4444);
+            kkSocket = new Socket("192.168.0.100", 4444);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(getKkSocket().getInputStream()));
             stdIn = new BufferedReader(new InputStreamReader(System.in));
