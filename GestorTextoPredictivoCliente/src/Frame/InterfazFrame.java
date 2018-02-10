@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JTextArea;
@@ -472,6 +473,7 @@ public class InterfazFrame extends javax.swing.JFrame {
             this.dispose();
         } catch (IOException ex) {
             this.errorConexion();
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -681,9 +683,9 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         Posicion posi = new Posicion();
 
-        this.jTextArea1.addKeyListener(new KeyListenerImpl(this.popUp, posi, this.jTextArea1, this.protocolo, botonError, itemCerrarSesion, separadorSesion));
-        this.jTextArea1.addCaretListener(new CaretListenerImpl(this.jTextArea1, posi));
-        this.jTextArea1.addMouseListener(new MouseListenerImpl(this.jPopupMenu2, this.jTextArea1));
+        this.jTextArea1.addKeyListener(new listenerEscritura(this.popUp, posi, this.jTextArea1, this.protocolo, botonError, itemCerrarSesion, separadorSesion, this));
+        this.jTextArea1.addCaretListener(new listenerCaret(this.jTextArea1, posi));
+        this.jTextArea1.addMouseListener(new listenerPopUpCopiarPegar(this.jPopupMenu2, this.jTextArea1));
 
         //Para rehacer y deshacer
         undo = new UndoManager();
@@ -793,7 +795,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     /**
      * Lisener de escriura en el area de texto
      */
-    private static class KeyListenerImpl implements KeyListener {
+    private static class listenerEscritura implements KeyListener {
 
         private final PopUpMenu popMenu;
         private final Posicion pos;
@@ -802,6 +804,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         private final JButton botonError;
         private final JMenuItem itemCerrarSesion;
         private final Separator separadorSesion;
+        private final InterfazFrame interfaz;
 
         /**
          * Construcor paramerizado
@@ -811,7 +814,7 @@ public class InterfazFrame extends javax.swing.JFrame {
          * @param jt Area de texo sobre la que se escribe
          * @param prot Proocolo de conexion
          */
-        public KeyListenerImpl(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot, JButton botonError, JMenuItem itemCerrarSesion, Separator separadorSesion) {
+        public listenerEscritura(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot, JButton botonError, JMenuItem itemCerrarSesion, Separator separadorSesion, InterfazFrame interfaz) {
             this.popMenu = pop;
             this.pos = p;
             this.jt = jt;
@@ -819,6 +822,7 @@ public class InterfazFrame extends javax.swing.JFrame {
             this.botonError = botonError;
             this.itemCerrarSesion = itemCerrarSesion;
             this.separadorSesion = separadorSesion;
+            this.interfaz = interfaz;
         }
 
         /**
@@ -910,7 +914,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     /**
      * Listener de cambio de posición del caret
      */
-    private class CaretListenerImpl implements CaretListener {
+    private class listenerCaret implements CaretListener {
 
         private final JTextArea jt;
         private final Posicion pos;
@@ -921,7 +925,7 @@ public class InterfazFrame extends javax.swing.JFrame {
          * @param jt Area de texto
          * @param pos Posicion del care
          */
-        CaretListenerImpl(JTextArea jt, Posicion pos) {
+        listenerCaret(JTextArea jt, Posicion pos) {
             this.jt = jt;
             this.pos = pos;
         }
@@ -954,14 +958,15 @@ public class InterfazFrame extends javax.swing.JFrame {
     }
 
     /**
-     * Lisener para detectar si se hace click derecho sobre el area de texto
+     * Lisener para detectar si se hace click derecho sobre el area de texto y
+     * desplegar un popup menu con los items cortar, copiar y pegar
      */
-    private static class MouseListenerImpl implements MouseListener {
+    private static class listenerPopUpCopiarPegar implements MouseListener {
 
         private final JPopupMenu popMenu;
         private final javax.swing.JTextArea jTextArea;
 
-        public MouseListenerImpl(JPopupMenu pop, javax.swing.JTextArea jT) {
+        public listenerPopUpCopiarPegar(JPopupMenu pop, javax.swing.JTextArea jT) {
             this.popMenu = pop;
             this.jTextArea = jT;
         }

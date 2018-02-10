@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author jcsp0003
  */
-public class Configuracion {
+public final class Configuracion {
 
     private Socket socket;
     private PrintWriter out;
@@ -53,7 +53,7 @@ public class Configuracion {
         try {
             SocketAddress sockaddr = new InetSocketAddress("192.168.0.100", 4444);
             socket = new Socket();
-            socket.connect(sockaddr, 2000);
+            socket.connect(sockaddr, 1000);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(getKkSocket().getInputStream()));
             stdIn = new BufferedReader(new InputStreamReader(System.in));

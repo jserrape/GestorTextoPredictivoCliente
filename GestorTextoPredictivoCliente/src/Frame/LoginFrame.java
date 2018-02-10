@@ -262,6 +262,7 @@ public class LoginFrame extends javax.swing.JDialog {
                 this.dispose();
             }
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -284,7 +285,7 @@ public class LoginFrame extends javax.swing.JDialog {
                 this.dispose();
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Eggs are not supposed to be green.", "Inane error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             this.dispose();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);

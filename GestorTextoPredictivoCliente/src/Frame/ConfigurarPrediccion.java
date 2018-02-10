@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -446,6 +447,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         } catch (IOException ex) {
             this.interfaz.errorConexion();
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -570,6 +572,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 jLabel7.setVisible(false);
             } catch (IOException ex) {
                 this.interfaz.errorConexion();
+                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -670,6 +673,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 jLabel7.setVisible(false);
             }
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -692,6 +696,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
             this.jTextField2.addKeyListener(new KeyListenerImpl(this.jTextField2, jButton3));
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
