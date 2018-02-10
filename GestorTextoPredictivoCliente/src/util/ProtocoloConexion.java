@@ -13,8 +13,6 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /**
  *
  * @author jcsp0003
@@ -34,7 +32,7 @@ public class ProtocoloConexion {
      * Función que en función de un código selecciona el tipo de mensaje que
      * debe enviar al servidor 0 Comunicar mac 1 Solicitar lista de dataSets 2
      * Crear dataSet 3 Eliminar dataSet 4 DataSet cargado 5 Cargar DataSet 6
-     * Añadir fichero al conjunto 7 Hacer prediccion
+     * Añadir fichero al conjunto 7 Hacer prediccion 9 registro
      *
      * @param cod Codigo del tipo de mensaje
      * @param mensaje Mensaje que envía al servidor
@@ -62,6 +60,9 @@ public class ProtocoloConexion {
                 return this.solicitarPrediccion(mensaje);
             case 8:
                 desconectar();
+                break;
+            case 9:
+                registro(mensaje);
                 break;
         }
         return "";
@@ -203,6 +204,10 @@ public class ProtocoloConexion {
         } catch (IOException ex) {
             Logger.getLogger(ProtocoloConexion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void registro(String mensaje) {
+        config.getOut().println("9" + mensaje);
     }
 
     /**

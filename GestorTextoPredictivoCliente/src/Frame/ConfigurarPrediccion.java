@@ -121,7 +121,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         jLabel3.setText("Tamaño máximo de la semilla");
 
-        jMinSemilla.setModel(new javax.swing.SpinnerNumberModel(1, 1, 3, 1));
+        jMinSemilla.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
 
         jLabel4.setText("Tamaño mínimo de la semilla");
 

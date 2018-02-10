@@ -46,6 +46,8 @@ public class InterfazFrame extends javax.swing.JFrame {
     private PopUpMenu popUp;
 
     private UndoManager undo;
+    
+    private boolean registrado;
 
     /**
      * Creates new form Interfaz
@@ -445,8 +447,13 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        if(registrado){
         ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
         conf.setVisible(true);
+        }else{
+            LoginFrame log=new LoginFrame(this,true,this.protocolo);
+            log.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -593,6 +600,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private void inicializar() {
         config = new Configuracion();
         setIdiomaInterfaz();
+        registrado=false;
         protocolo = new ProtocoloConexion(config);
 
         font = new Font("Arial", Font.PLAIN, 20);
