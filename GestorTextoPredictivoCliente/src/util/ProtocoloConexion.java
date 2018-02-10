@@ -25,7 +25,6 @@ public class ProtocoloConexion {
     public ProtocoloConexion(Configuracion conf) {
         this.config = conf;
         this.mac = getMac();
-        enviarMensaje(0, "");
     }
 
     /**
@@ -41,7 +40,7 @@ public class ProtocoloConexion {
     public String enviarMensaje(int cod, String mensaje) {
         switch (cod) {
             case 0:
-                comunicarMac();
+                desconectar();
                 break;
             case 1:
                 return obtenerListaDataSet();
@@ -194,7 +193,7 @@ public class ProtocoloConexion {
      */
     public void desconectar() {
         try {
-            config.getOut().println("8");
+            config.getOut().println("0");
             config.getOut().close();
             config.getIn().close();
             config.getStdIn().close();

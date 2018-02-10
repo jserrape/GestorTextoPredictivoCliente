@@ -1006,7 +1006,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         @Override
         public void windowClosing(java.awt.event.WindowEvent evt) {
-            //this.protocolo.desconectar();
+            this.protocolo.enviarMensaje(0, "");
         }
     }
 
