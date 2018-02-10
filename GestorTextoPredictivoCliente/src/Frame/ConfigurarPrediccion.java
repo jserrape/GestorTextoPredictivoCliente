@@ -38,9 +38,11 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     /**
      * Constructor parametrizado de la clase ConfigurarPrediccion
      *
-     * @param parent
-     * @param modal
-     * @param protocol
+     * @param parent parent Clase frame que invoca a ConfigurarPrediccion
+     * @param modal Modo del JDialog
+     * @param protocol Objeto con las funciones para comunicarse de con el
+     * servidor
+     * @param interf Frame principal de escritura
      */
     public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf) {
         super(parent, modal);
@@ -399,7 +401,9 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 jButton8.setEnabled(false);
                 jLabel7.setVisible(true);
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                 this.interfaz.errorConexion();
+                this.dispose();
                 Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -448,6 +452,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         } catch (IOException ex) {
             this.interfaz.errorConexion();
             JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -573,6 +578,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             } catch (IOException ex) {
                 this.interfaz.errorConexion();
                 JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                this.dispose();
                 Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -619,7 +625,6 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * seleccion.
      */
     private void configuracionInicial() {
-
         File miDir = new File(".\\idioma");
         File f;
         try {
@@ -675,6 +680,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
+            this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -694,16 +700,17 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 }
                 this.tablaConjuntos.setRowSelectionInterval(0, 0);
             }
-            this.jTextField2.addKeyListener(new KeyListenerImpl(this.jTextField2, jButton3));
+            this.jTextField2.addKeyListener(new listenerCrearConjunto(this.jTextField2, jButton3));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
+            this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Añade una fila a la abla
+     * Añade una fila a la tabla de ficheros
      *
      * @param tipo "fichero" o "directorio"
      * @param ruta Ruta del documento
@@ -715,6 +722,12 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         modeloTablaFicheros.addRow(datos);
     }
 
+    /**
+     * Añade una fila a la tabla de conjunos
+     *
+     * @param nombre Nombre del conjunto
+     * @param idioma Idioma del conjunto
+     */
     public void nuevaFilaTablaConjuntos(String nombre, String idioma) {
         String[] datos = new String[2];
         datos[0] = nombre;
@@ -736,16 +749,31 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         }
     }
 
-    private static class KeyListenerImpl implements KeyListener {
+    /**
+     * Listener que evita el uso ciertos caracteres en el nombre de los
+     * conjuntos y desbloquea el botón de crear conjunto
+     */
+    private static class listenerCrearConjunto implements KeyListener {
 
         private final JTextField jt;
         private final JButton boton;
 
-        public KeyListenerImpl(JTextField jt, JButton bot) {
+        /**
+         * Consructor parametrizado
+         * 
+         * @param jt JTextField de escritura del nombre del conjunto
+         * @param bot Boton para crear el conjunto
+         */
+        public listenerCrearConjunto(JTextField jt, JButton bot) {
             this.jt = jt;
             this.boton = bot;
         }
 
+        /**
+         * Evento de pulsar y soltar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyTyped(KeyEvent e) {
             if (e.getKeyChar() == '~' || e.getKeyChar() == '\\' || e.getKeyChar() == '/'
@@ -756,11 +784,20 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         }
 
+        /**
+         * Evento de pulsar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyPressed(KeyEvent e) {
-
         }
 
+        /**
+         * Evento de soltar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyReleased(KeyEvent e) {
             if (!"".equals(this.jt.getText())) {

@@ -24,12 +24,12 @@ public class LoginFrame extends javax.swing.JDialog {
     private final InterfazFrame interfaz;
 
     /**
-     * Creates new form LoginFrame
+     * Consttructor parametrizado
      *
-     * @param parent
-     * @param modal
-     * @param protocolo
-     * @param inter
+     * @param parent Clase frame que invoca a LoginFrame
+     * @param modal Modo del JDialog
+     * @param protocolo Clase con las funciones para la comunicación con el servidor
+     * @param inter Interfaz principal de escritura
      */
     public LoginFrame(java.awt.Frame parent, boolean modal, ProtocoloConexion protocolo, InterfazFrame inter) {
         super(parent, modal);
@@ -38,8 +38,8 @@ public class LoginFrame extends javax.swing.JDialog {
 
         this.protocolo = protocolo;
         this.interfaz = inter;
-        jButton3.setEnabled(false);
-        jButton1.setEnabled(false);
+        botonRegistrarse.setEnabled(false);
+        botonAcceder.setEnabled(false);
         jLabel7.setVisible(false);
         jLabel8.setVisible(false);
 
@@ -63,12 +63,12 @@ public class LoginFrame extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonAcceder = new javax.swing.JButton();
+        botonCancelar1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonRegistrarse = new javax.swing.JButton();
+        botonCancelar2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -87,17 +87,17 @@ public class LoginFrame extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña");
 
-        jButton1.setText("Acceder");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAcceder.setText("Acceder");
+        botonAcceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAccederActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar1.setText("Cancelar");
+        botonCancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCancelar1ActionPerformed(evt);
             }
         });
 
@@ -111,9 +111,9 @@ public class LoginFrame extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jButton1)
+                .addComponent(botonAcceder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(botonCancelar1)
                 .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(139, 139, 139)
@@ -145,24 +145,24 @@ public class LoginFrame extends javax.swing.JDialog {
                 .addComponent(jLabel8)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonAcceder)
+                    .addComponent(botonCancelar1))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Acceder", jPanel1);
 
-        jButton3.setText("Registrarse");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrarse.setText("Registrarse");
+        botonRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonRegistrarseActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Cancelar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar2.setText("Cancelar");
+        botonCancelar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonCancelar2ActionPerformed(evt);
             }
         });
 
@@ -204,9 +204,9 @@ public class LoginFrame extends javax.swing.JDialog {
                                     .addComponent(jLabel7))))
                         .addGap(36, 100, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(botonRegistrarse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(botonCancelar2)
                         .addGap(28, 28, 28))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -231,8 +231,8 @@ public class LoginFrame extends javax.swing.JDialog {
                     .addComponent(fieldMail2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(botonRegistrarse)
+                    .addComponent(botonCancelar2))
                 .addContainerGap())
         );
 
@@ -252,7 +252,12 @@ public class LoginFrame extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    /**
+     * Solicita al servidor regisrarse
+     * 
+     * @param evt Accion del boton
+     */
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
         try {
             String aux = this.protocolo.enviarMensaje(9, this.fieldNombre.getText() + "#" + this.fieldApellidos.getText() + "#" + this.fieldMail1.getText());
             System.out.println("Aux:" + aux);
@@ -266,17 +271,32 @@ public class LoginFrame extends javax.swing.JDialog {
             this.interfaz.errorConexion();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    /**
+     * Cierra el frame
+     * 
+     * @param evt Accion del boton
+     */
+    private void botonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelar2ActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonCancelar2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Cierra el frame
+     * 
+     * @param evt Accion del boton
+     */
+    private void botonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelar1ActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCancelar1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Solicita al servidor acceder a una cuenta
+     * 
+     * @param evt Accion del boton
+     */
+    private void botonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAccederActionPerformed
         try {
             if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + jTextField2.getText()))) {
                 jLabel8.setVisible(true);
@@ -290,18 +310,18 @@ public class LoginFrame extends javax.swing.JDialog {
             this.dispose();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonAccederActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAcceder;
+    private javax.swing.JButton botonCancelar1;
+    private javax.swing.JButton botonCancelar2;
+    private javax.swing.JButton botonRegistrarse;
     private javax.swing.JTextField fieldApellidos;
     private javax.swing.JTextField fieldMail1;
     private javax.swing.JTextField fieldMail2;
     private javax.swing.JTextField fieldNombre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -317,37 +337,64 @@ public class LoginFrame extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Listener de escritura en los campos del login 
+     */
     private class listenerLogin implements KeyListener {
 
         private final JTextField mail;
         private final JTextField pass;
 
+        /**
+         * Consructor parametrizado
+         * 
+         * @param mail JTextField del correo
+         * @param pass JTextField de la conraseña
+         */
         public listenerLogin(JTextField mail, JTextField pass) {
             this.mail = mail;
             this.pass = pass;
         }
 
+        /**
+         * Evento de pulsar y soltar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyTyped(KeyEvent e) {
         }
 
+        /**
+         * Evento de pulsar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyPressed(KeyEvent e) {
         }
 
+        /**
+         * Evento de soltar una tecla para desbloquear el boton de acceder
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyReleased(KeyEvent e) {
             String aux1, aux2;
             aux1 = mail.getText().replaceAll(" ", "");
             aux2 = pass.getText().replaceAll(" ", "");
             if (!"".equals(aux1) && !"".equals(aux2)) {
-                jButton1.setEnabled(true);
+                botonAcceder.setEnabled(true);
             } else {
-                jButton1.setEnabled(false);
+                botonAcceder.setEnabled(false);
             }
         }
     }
 
+    /**
+     * Listener de escritura en los campos de regisro 
+     */
     private class listenerRegistro implements KeyListener {
 
         private final JTextField nombre;
@@ -355,6 +402,14 @@ public class LoginFrame extends javax.swing.JDialog {
         private final JTextField mail1;
         private final JTextField mail2;
 
+        /**
+         * Consructor parametrizado
+         * 
+         * @param nombre JTextField del nombre
+         * @param app JTextField de los apellidos
+         * @param mail1 JTextField del correo 
+         * @param mail2 JTextField de repetir el correo
+         */
         public listenerRegistro(JTextField nombre, JTextField app, JTextField mail1, JTextField mail2) {
             this.nombre = nombre;
             this.app = app;
@@ -362,14 +417,29 @@ public class LoginFrame extends javax.swing.JDialog {
             this.mail2 = mail2;
         }
 
+        /**
+         * Evento de pulsar y soltar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyTyped(KeyEvent e) {
         }
 
+        /**
+         * Evento de pulsar una tecla
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyPressed(KeyEvent e) {
         }
 
+        /**
+         * Evento de soltar una tecla para desbloquear el boton de registrarse
+         *
+         * @param ke Evento de tecla
+         */
         @Override
         public void keyReleased(KeyEvent e) {
             String aux1, aux2, aux3, aux4;
@@ -379,9 +449,9 @@ public class LoginFrame extends javax.swing.JDialog {
             aux4 = mail2.getText().replaceAll(" ", "");
 
             if (aux3.equals(aux4) && !"".equals(aux1) && !"".equals(aux2) && !"".equals(aux3)) {
-                jButton3.setEnabled(true);
+                botonRegistrarse.setEnabled(true);
             } else {
-                jButton3.setEnabled(false);
+                botonRegistrarse.setEnabled(false);
             }
         }
     }

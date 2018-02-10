@@ -20,12 +20,22 @@ public class HiloLecturaFicheros implements Runnable {
     private final ArrayList<String> ficheros;
     private final ArrayList<String> urls;
 
+    /**
+     * Constructor paramettrizado de la clase HiloLecturaFicheros 
+     * 
+     * @param prot Clase con las funciones de comunicación con el servidor
+     * @param ficheros Array con los ficheros a leer
+     * @param urls Array con las urls a leer
+     */
     public HiloLecturaFicheros(ProtocoloConexion prot, ArrayList<String> ficheros, ArrayList<String> urls) {
         this.protocolo = prot;
         this.ficheros = ficheros;
         this.urls = urls;
     }
 
+    /**
+     * Funcion que lee los documenos y envía las cadenas al servidor
+     */
     @Override
     public void run() {
         lecturaDatos lectura = new lecturaDatos();

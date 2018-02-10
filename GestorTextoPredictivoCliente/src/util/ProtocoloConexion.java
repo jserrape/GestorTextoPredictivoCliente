@@ -7,7 +7,6 @@ package util;
 
 import java.io.IOException;
 
-
 /**
  *
  * @author jcsp0003
@@ -22,13 +21,14 @@ public class ProtocoloConexion {
 
     /**
      * Función que en función de un código selecciona el tipo de mensaje que
-     * debe enviar al servidor 0 Comunicar mac 1 Solicitar lista de dataSets 2
+     * debe enviar al servidor 0 Cerrar conexion 1 Solicitar lista de dataSets 2
      * Crear dataSet 3 Eliminar dataSet 4 DataSet cargado 5 Cargar DataSet 6
-     * Añadir fichero al conjunto 7 Hacer prediccion 9 registro
+     * Añadir fichero al conjunto 7 Hacer prediccion 8 login 9 registro
      *
      * @param cod Codigo del tipo de mensaje
      * @param mensaje Mensaje que envía al servidor
      * @return Respuesa del servidor
+     * @throws java.io.IOException Excepcion en las E/S
      */
     public String enviarMensaje(int cod, String mensaje) throws IOException {
         switch (cod) {
@@ -57,7 +57,6 @@ public class ProtocoloConexion {
         }
         return "";
     }
-
 
     /**
      * Solicita al servidor la lisa de los dataSet asociados
@@ -93,7 +92,7 @@ public class ProtocoloConexion {
      */
     private String eliminarDataSet(String nombre) throws IOException {
         config.getOut().println("3" + nombre);
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
     /**
@@ -103,7 +102,7 @@ public class ProtocoloConexion {
      */
     private String dataSetCargado() throws IOException {
         config.getOut().println("4");
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
     /**
@@ -114,7 +113,7 @@ public class ProtocoloConexion {
      */
     private String cargarDataSet(String mensaje) throws IOException {
         config.getOut().println("5" + mensaje);
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
     /**
@@ -136,29 +135,44 @@ public class ProtocoloConexion {
     private String solicitarPrediccion(String mensaje) throws IOException {
         config.getOut().println("7" + mensaje);
 
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
     /**
      * Se desconecta del servidor
+     * 
+     * @throws java.io.IOException Excepcion en las E/S
      */
     public void desconectar() throws IOException {
-            config.getOut().println("0");
-            config.getOut().close();
-            config.getIn().close();
-            config.getStdIn().close();
-            config.getKkSocket().close();
+        config.getOut().println("0");
+        config.getOut().close();
+        config.getIn().close();
+        config.getStdIn().close();
+        config.getKkSocket().close();
     }
 
+    /**
+     * Inicia sesión
+     *
+     * @param mensaje Cadena con el correo y la contraseña
+     * @return Inicio correco 1 o incorrecto -1
+     * @throws IOException Excepcion en las E/S
+     */
     private String login(String mensaje) throws IOException {
         config.getOut().println("8" + mensaje);
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
+    /**
+     * Registrar cuena en el servidor
+     * 
+     * @param mensaje Mensaje con los datos de la cuenta
+     * @return Registro correcto 1 o incorrecto -1
+     * @throws IOException Excepcion en las E/S
+     */
     private String registro(String mensaje) throws IOException {
         config.getOut().println("9" + mensaje);
-
-            return config.getIn().readLine();
+        return config.getIn().readLine();
     }
 
 }

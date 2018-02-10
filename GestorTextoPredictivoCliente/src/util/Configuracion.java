@@ -39,15 +39,18 @@ public final class Configuracion {
     private final InterfazFrame interfaz;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto de la clase Configuracion
      *
-     * @param interfaz
+     * @param interfaz Clase de la interfaz principal 
      */
     public Configuracion(InterfazFrame interfaz) {
         this.interfaz = interfaz;
         conectar();
     }
 
+    /**
+     * Conecta con el servidor
+     */
     public void conectar() {
         cargarConf();
         try {

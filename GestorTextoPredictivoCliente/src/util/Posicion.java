@@ -15,7 +15,7 @@ public class Posicion {
     private int y;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto de la clase Posicion
      */
     public Posicion() {
         this.x = -1;

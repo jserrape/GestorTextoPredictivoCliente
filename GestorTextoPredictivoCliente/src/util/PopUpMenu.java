@@ -23,7 +23,7 @@ public class PopUpMenu {
     private final javax.swing.JTextArea jt;
 
     /**
-     * Constructor parametrizado
+     * Constructor parametrizado de la clase PopUpMenu
      *
      * @param jp Objeto JPopMenu que mostrará las predicciones
      * @param jt Area de texto principal de escritura

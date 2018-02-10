@@ -29,11 +29,11 @@ public class FileChooserFrame extends javax.swing.JDialog {
     private final int accion;
 
     /**
-     * Creates new form FileChooserFrame
+     * Constructor parametrizado 
      *
-     * @param parent
-     * @param modal
-     * @param jt
+     * @param parent Clase frame que invoca a FileChooserFrame
+     * @param modal Modo del JDialog
+     * @param jt JTextArea de escritura principal
      * @param accion 1 abrir 3 guardarComo
      */
     public FileChooserFrame(java.awt.Frame parent, boolean modal, javax.swing.JTextArea jt, int accion) {
@@ -86,6 +86,11 @@ public class FileChooserFrame extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Accion de pulsar el boton de abrir/guardar
+     * 
+     * @param evt Accion del boton
+     */
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         if (this.accion == 1) {
             abrir(evt);
@@ -95,6 +100,12 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
+    
+    /**
+     * Funcion de guardar un fichero en un directorio específico
+     * 
+     * @param evt Accion del boton
+     */
     private void guardarComo(java.awt.event.ActionEvent evt) {
         String command = evt.getActionCommand();
         if (command.equals(JFileChooser.APPROVE_SELECTION)) {
@@ -116,6 +127,13 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
+    
+    /**
+     * 
+     * Crea un fichero en caso de no existir
+     * 
+     * @param SelectedFile Nombre del archivo seleccionado
+     */
     private void crearFichero(String SelectedFile) {
         FileWriter fichero = null;
         try {
@@ -134,6 +152,12 @@ public class FileChooserFrame extends javax.swing.JDialog {
         this.dispose();
     }
 
+    
+    /**
+     * Funcion para abrir un fichero
+     * 
+     * @param evt Evento de pulsar el un boton
+     */
     private void abrir(java.awt.event.ActionEvent evt) {
         JFileChooser selector = (JFileChooser) evt.getSource();
         String command = evt.getActionCommand();
@@ -162,6 +186,10 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
+    
+    /**
+     * Función de apertura del contenido de un .txt
+     */
     public void abrirTxT() {
         File archivo;
         FileReader fr = null;
@@ -187,6 +215,9 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Función de apertura del contenido de un .pdf
+     */
     public void abrirPdf() {
         lecturaDatos lec = new lecturaDatos();
         try {
@@ -196,16 +227,32 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Clase de filtrado de ficheros
+     */
     public class FileTypeFilter extends FileFilter {
 
         private final String extension;
         private final String description;
 
+        
+        /**
+         * Constructor parametrizado
+         * 
+         * @param extension Extensión del fichero
+         * @param description Descripion de la extensión
+         */
         public FileTypeFilter(String extension, String description) {
             this.extension = extension;
             this.description = description;
         }
 
+        /**
+         * Acepta o rechaza un documento
+         * 
+         * @param file Archivo del directorio
+         * @return Aceptación o rechazo del fichero
+         */
         @Override
         public boolean accept(File file) {
             if (file.isDirectory()) {
@@ -214,6 +261,11 @@ public class FileChooserFrame extends javax.swing.JDialog {
             return file.getName().endsWith(extension);
         }
 
+        /**
+         * Devuelve la descripcion del tipo de fichero
+         * 
+         * @return Descripcion del tipo de fichero
+         */
         @Override
         public String getDescription() {
             return description + String.format(" (*%s)", extension);
