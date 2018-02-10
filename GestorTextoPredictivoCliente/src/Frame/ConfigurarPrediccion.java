@@ -415,7 +415,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         System.out.println("Conjunto a crear:" + textoAEnviar);
         String lista = this.protocolo.enviarMensaje(2, textoAEnviar);
-
+        System.out.println("lista:"+lista);
         this.modeloTablaConjuntos = new DefaultTableModel();
         this.modeloTablaConjuntos.addColumn("Nombre");
         this.modeloTablaConjuntos.addColumn("Idioma");

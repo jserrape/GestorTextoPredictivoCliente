@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -46,7 +47,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private PopUpMenu popUp;
 
     private UndoManager undo;
-    
+
     private boolean registrado;
 
     /**
@@ -59,6 +60,8 @@ public class InterfazFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         inicializar();
+
+        addWindowListener(new listenerCerrarVenana(protocolo));
     }
 
     /**
@@ -447,11 +450,11 @@ public class InterfazFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        if(registrado){
-        ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
-        conf.setVisible(true);
-        }else{
-            LoginFrame log=new LoginFrame(this,true,this.protocolo,this);
+        if (registrado) {
+            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo);
+            conf.setVisible(true);
+        } else {
+            LoginFrame log = new LoginFrame(this, true, this.protocolo, this);
             log.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
@@ -597,18 +600,18 @@ public class InterfazFrame extends javax.swing.JFrame {
         this.jTextArea1.setFont(font);
     }
 
-    public void logear(){
-        this.registrado=true;
+    public void logear() {
+        this.registrado = true;
     }
-    
-    public void deslogear(){
-        this.registrado=false;
+
+    public void deslogear() {
+        this.registrado = false;
     }
-    
+
     private void inicializar() {
         config = new Configuracion();
         setIdiomaInterfaz();
-        registrado=false;
+        registrado = false;
         protocolo = new ProtocoloConexion(config);
 
         font = new Font("Arial", Font.PLAIN, 20);
@@ -990,6 +993,20 @@ public class InterfazFrame extends javax.swing.JFrame {
                         break;
                 }
             }
+        }
+    }
+
+    private static class listenerCerrarVenana extends WindowAdapter {
+
+        private ProtocoloConexion protocolo;
+        
+        public listenerCerrarVenana(ProtocoloConexion protocolo) {
+            this.protocolo=protocolo;
+        }
+
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent evt) {
+            //this.protocolo.desconectar();
         }
     }
 
