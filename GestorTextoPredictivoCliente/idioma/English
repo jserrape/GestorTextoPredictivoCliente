@@ -34,3 +34,34 @@ Add new url:
 Add new url
 Predictive text manager with configurable data source
 Language selection
+Log in
+Sign in
+Email
+Password
+Name
+Surname
+Repeat email
+Wrong username or password
+There is already a user with that email
+Select set
+Add documents
+Load
+Delete
+DataSet loaded:
+Create new set
+Name of the set:
+Set language
+Maximum size of the seed
+Minimum size of the seed
+Size of the prediction
+Maximum predictions
+You must have a set of data loaded to be able to add documents.
+New file
+New directory
+New html
+Delete
+None
+Other
+Search:
+Match case
+Find next

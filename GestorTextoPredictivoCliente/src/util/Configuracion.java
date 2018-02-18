@@ -41,11 +41,14 @@ public final class Configuracion {
     /**
      * Constructor por defecto de la clase Configuracion
      *
-     * @param interfaz Clase de la interfaz principal 
+     * @param interfaz Clase de la interfaz principal
      */
     public Configuracion(InterfazFrame interfaz) {
         this.interfaz = interfaz;
         conectar();
+
+        escribirFicheroIdiomaEspanol();
+        escribirFicheroIdiomaIngles();
     }
 
     /**
@@ -54,7 +57,7 @@ public final class Configuracion {
     public void conectar() {
         cargarConf();
         try {
-            SocketAddress sockaddr = new InetSocketAddress("192.168.0.100", 4444);
+            SocketAddress sockaddr = new InetSocketAddress("192.168.0.101", 4444);
             socket = new Socket();
             socket.connect(sockaddr, 1000);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
@@ -179,5 +182,334 @@ public final class Configuracion {
      */
     public void setIdioma(String idioma) {
         this.idioma = idioma;
+    }
+
+    public void escribirFicheroIdiomaEspanol() {
+        String ruta = "./idioma/Español";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("Archivo");
+            bw.newLine();
+            bw.write("Editar");
+            bw.newLine();
+            bw.write("Ajustes");
+            bw.newLine();
+            bw.write("Ayuda");
+            bw.newLine();
+            bw.write("Nuevo");
+            bw.newLine();
+            bw.write("Abrir");
+            bw.newLine();
+            bw.write("Guardar");
+            bw.newLine();
+            bw.write("Guardar como...");
+            bw.newLine();
+            bw.write("Salir");
+            bw.newLine();
+            bw.write("Deshacer");
+            bw.newLine();
+            bw.write("Cortar");
+            bw.newLine();
+            bw.write("Copiar");
+            bw.newLine();
+            bw.write("Pegar");
+            bw.newLine();
+            bw.write("Eliminar");
+            bw.newLine();
+            bw.write("Buscar...");
+            bw.newLine();
+            bw.write("Reemplazar");
+            bw.newLine();
+            bw.write("Seleccionar todo");
+            bw.newLine();
+            bw.write("Hora y fecha");
+            bw.newLine();
+            bw.write("Formato");
+            bw.newLine();
+            bw.write("Predicción");
+            bw.newLine();
+            bw.write("Idioma");
+            bw.newLine();
+            bw.write("Aceptar");
+            bw.newLine();
+            bw.write("Cancelar");
+            bw.newLine();
+            bw.write("Elegir idioma de la interfaz");
+            bw.newLine();
+            bw.write("Seleccione uno de los idiomas siguientes para la interfaz");
+            bw.newLine();
+            bw.write("Fuente");
+            bw.newLine();
+            bw.write("Estilo de la fuente");
+            bw.newLine();
+            bw.write("Tamaño");
+            bw.newLine();
+            bw.write("Muestra");
+            bw.newLine();
+            bw.write("Normal");
+            bw.newLine();
+            bw.write("Negrita");
+            bw.newLine();
+            bw.write("Cursiva");
+            bw.newLine();
+            bw.write("Anadir nueva url:");
+            bw.newLine();
+            bw.write("Anadir nueva url");
+            bw.newLine();
+            bw.write("Gestor de texto predictivo con origen de datos configurable");
+            bw.newLine();
+            bw.write("Selección de idioma");
+            bw.newLine();
+            bw.write("Acceder");
+            bw.newLine();
+            bw.write("Registrarse");
+            bw.newLine();
+            bw.write("Correo");
+            bw.newLine();
+            bw.write("Contraseña");
+            bw.newLine();
+            bw.write("Nombre");
+            bw.newLine();
+            bw.write("Apellidos");
+            bw.newLine();
+            bw.write("Repetir correo");
+            bw.newLine();
+            bw.write("Usuario o contraseña erróneo");
+            bw.newLine();
+            bw.write("Ya existe un usuario con ese correo");
+            bw.newLine();
+            bw.write("Seleccionar conjunto");
+            bw.newLine();
+            bw.write("Añadir documentos");
+            bw.newLine();
+            bw.write("Cargar");
+            bw.newLine();
+            bw.write("Eliminar");
+            bw.newLine();
+            bw.write("DataSet cargado:");
+            bw.newLine();
+            bw.write("Crear nuevo conjunto");
+            bw.newLine();
+            bw.write("Nombre del conjunto:");
+            bw.newLine();
+            bw.write("Idioma del conjunto");
+            bw.newLine();
+            bw.write("Tamaño máximo de la semilla");
+            bw.newLine();
+            bw.write("Tamaño mínimo de la semilla");
+            bw.newLine();
+            bw.write("Tamaño de la predicción");
+            bw.newLine();
+            bw.write("Máximo de predicciones");
+            bw.newLine();
+            bw.write("Se debe tener un conjunto de datos cargado para poder añadir documentos.");
+            bw.newLine();
+            bw.write("Nuevo fichero");
+            bw.newLine();
+            bw.write("Nuevo directorio");
+            bw.newLine();
+            bw.write("Nuevo html");
+            bw.newLine();
+            bw.write("Borrar");
+            bw.newLine();
+            bw.write("Ninguno");
+            bw.newLine();
+            bw.write("Otro");
+            bw.newLine();
+            bw.write("Buscar:");
+            bw.newLine();
+            bw.write("Coincidir mayúsculas y minúsculas");
+            bw.newLine();
+            bw.write("Buscar siguiente");
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void escribirFicheroIdiomaIngles() {
+        String ruta = "./idioma/English";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("Archive");
+            bw.newLine();
+            bw.write("Edit");
+            bw.newLine();
+            bw.write("Settings");
+            bw.newLine();
+            bw.write("Help");
+            bw.newLine();
+            bw.write("New");
+            bw.newLine();
+            bw.write("Open");
+            bw.newLine();
+            bw.write("Save");
+            bw.newLine();
+            bw.write("Save as...");
+            bw.newLine();
+            bw.write("Close");
+            bw.newLine();
+            bw.write("Undo");
+            bw.newLine();
+            bw.write("Cut");
+            bw.newLine();
+            bw.write("Copy");
+            bw.newLine();
+            bw.write("Paste");
+            bw.newLine();
+            bw.write("Remove");
+            bw.newLine();
+            bw.write("Find...");
+            bw.newLine();
+            bw.write("Replace");
+            bw.newLine();
+            bw.write("Select all");
+            bw.newLine();
+            bw.write("Time and date");
+            bw.newLine();
+            bw.write("Format");
+            bw.newLine();
+            bw.write("Prediction");
+            bw.newLine();
+            bw.write("Language");
+            bw.newLine();
+            bw.write("Accept");
+            bw.newLine();
+            bw.write("Cancel");
+            bw.newLine();
+            bw.write("Choose interface language");
+            bw.newLine();
+            bw.write("Select one of the following languages ​​for the interface:");
+            bw.newLine();
+            bw.write("Font");
+            bw.newLine();
+            bw.write("Font style");
+            bw.newLine();
+            bw.write("Size");
+            bw.newLine();
+            bw.write("Sample");
+            bw.newLine();
+            bw.write("Normal");
+            bw.newLine();
+            bw.write("Bold");
+            bw.newLine();
+            bw.write("Italics");
+            bw.newLine();
+            bw.write("Add new url:");
+            bw.newLine();
+            bw.write("Add new url");
+            bw.newLine();
+            bw.write("Predictive text manager with configurable data source");
+            bw.newLine();
+            bw.write("Language selection");
+            bw.newLine();
+            bw.write("Log in");
+            bw.newLine();
+            bw.write("Sign in");
+            bw.newLine();
+            bw.write("Email");
+            bw.newLine();
+            bw.write("Password");
+            bw.newLine();
+            bw.write("Name");
+            bw.newLine();
+            bw.write("Surname");
+            bw.newLine();
+            bw.write("Repeat email");
+            bw.newLine();
+            bw.write("Wrong username or password");
+            bw.newLine();
+            bw.write("There is already a user with that email");
+            bw.newLine();
+            bw.write("Select set");
+            bw.newLine();
+            bw.write("Add documents");
+            bw.newLine();
+            bw.write("Load");
+            bw.newLine();
+            bw.write("Delete");
+            bw.newLine();
+            bw.write("DataSet loaded:");
+            bw.newLine();
+            bw.write("Create new set");
+            bw.newLine();
+            bw.write("Name of the set:");
+            bw.newLine();
+            bw.write("Set language");
+            bw.newLine();
+            bw.write("Maximum size of the seed");
+            bw.newLine();
+            bw.write("Minimum size of the seed");
+            bw.newLine();
+            bw.write("Size of the prediction");
+            bw.newLine();
+            bw.write("Maximum predictions");
+            bw.newLine();
+            bw.write("You must have a set of data loaded to be able to add documents.");
+            bw.newLine();
+            bw.write("New file");
+            bw.newLine();
+            bw.write("New directory");
+            bw.newLine();
+            bw.write("New html");
+            bw.newLine();
+            bw.write("Delete");
+            bw.newLine();
+            bw.write("None");
+            bw.newLine();
+            bw.write("Other");
+            bw.newLine();
+            bw.write("Search:");
+            bw.newLine();
+            bw.write("Match case");
+            bw.newLine();
+            bw.write("Find next");
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void escribirFicheroIdiomaFrances() {
+        String ruta = "./idioma/Français";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void escribirFicheroIdiomaItaliano() {
+        String ruta = "./idioma/Italiano";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void escribirFicheroIdiomaPortugues() {
+        String ruta = "./idioma/Portugues";
+        File archivo = new File(ruta);
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(archivo));
+            
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -197,7 +197,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="El dataSet cargado:"/>
+                <Property name="text" type="java.lang.String" value="DataSet cargado:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField1">

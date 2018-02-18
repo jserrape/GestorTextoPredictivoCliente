@@ -8,6 +8,7 @@ package Frame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import util.Configuracion;
 
 /**
  *
@@ -17,6 +18,7 @@ public class BuscarFrame extends javax.swing.JDialog {
 
     private final javax.swing.JTextArea jTextArea;
     private int posCaret;
+    private final Configuracion config;
 
     /**
      * Creates new form BuscarFrame
@@ -25,10 +27,12 @@ public class BuscarFrame extends javax.swing.JDialog {
      * @param modal Modo del JDialog
      * @param jt JTextArea principal de escritura
      */
-    public BuscarFrame(java.awt.Frame parent, boolean modal, javax.swing.JTextArea jt) {
+    public BuscarFrame(java.awt.Frame parent, boolean modal, javax.swing.JTextArea jt, Configuracion conf) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.config = conf;
+        setIdiomaInterfaz();
 
         jButton1.setEnabled(false);
         jTextField1.addKeyListener(new listenerEscritura(jTextField1, this.jButton1));
@@ -156,6 +160,17 @@ public class BuscarFrame extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+
+    /**
+     * Establece el idioma indicado en la configuracion
+     */
+    private void setIdiomaInterfaz() {
+        jLabel1.setText(this.config.getPalabra(64));
+        check.setText(this.config.getPalabra(65));
+        jButton1.setText(this.config.getPalabra(66));
+        jButton2.setText(this.config.getPalabra(21));
+    }
 
     /**
      * Listener que bloquea o desbloquea el botón de buscar la siguiente

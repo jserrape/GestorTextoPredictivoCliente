@@ -34,3 +34,34 @@ Anadir nueva url:
 Anadir nueva url
 Gestor de texto predictivo con origen de datos configurable
 Selección de idioma
+Acceder
+Registrarse
+Correo
+Contraseña
+Nombre
+Apellidos
+Repetir correo
+Usuario o contraseña erróneo
+Ya existe un usuario con ese correo
+Seleccionar conjunto
+Añadir documentos
+Cargar
+Eliminar
+DataSet cargado:
+Crear nuevo conjunto
+Nombre del conjunto:
+Idioma del conjunto
+Tamaño máximo de la semilla
+Tamaño mínimo de la semilla
+Tamaño de la predicción
+Máximo de predicciones
+Se debe tener un conjunto de datos cargado para poder añadir documentos.
+Nuevo fichero
+Nuevo directorio
+Nuevo html
+Borrar
+Ninguno
+Otro
+Buscar:
+Coincidir mayúsculas y minúsculas
+Buscar siguiente

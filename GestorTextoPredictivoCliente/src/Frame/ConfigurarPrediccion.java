@@ -21,6 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import util.Configuracion;
 import util.HiloLecturaFicheros;
 import util.ProtocoloConexion;
 
@@ -34,6 +35,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     private DefaultTableModel modeloTablaFicheros;
     private DefaultTableModel modeloTablaConjuntos;
     private final InterfazFrame interfaz;
+    private final Configuracion config;
 
     /**
      * Constructor parametrizado de la clase ConfigurarPrediccion
@@ -44,10 +46,12 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * servidor
      * @param interf Frame principal de escritura
      */
-    public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf) {
+    public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf, Configuracion conf) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.config = conf;
+        setIdiomaInterfaz();
 
         this.protocolo = protocol;
         this.interfaz = interf;
@@ -107,7 +111,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("El dataSet cargado:");
+        jLabel1.setText("DataSet cargado:");
 
         jTextField1.setEnabled(false);
 
@@ -377,8 +381,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
                 System.out.println("Lista: " + lista);
                 this.modeloTablaConjuntos = new DefaultTableModel();
-                this.modeloTablaConjuntos.addColumn("Nombre");
-                this.modeloTablaConjuntos.addColumn("Idioma");
+                this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
+                this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
                 this.tablaConjuntos.setModel(modeloTablaConjuntos);
                 if (!"".equals(lista)) {
                     System.out.println(lista);
@@ -393,7 +397,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                         this.tablaConjuntos.setRowSelectionInterval(0, 0);
                     }
                 }
-                jTextField1.setText("Ninguno");
+                jTextField1.setText(this.config.getPalabra(62));
                 jButton4.setEnabled(false);
                 jButton5.setEnabled(false);
                 jButton6.setEnabled(false);
@@ -433,8 +437,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
             System.out.println("lista:" + lista);
             this.modeloTablaConjuntos = new DefaultTableModel();
-            this.modeloTablaConjuntos.addColumn("Nombre");
-            this.modeloTablaConjuntos.addColumn("Idioma");
+            this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
+            this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
             this.tablaConjuntos.setModel(modeloTablaConjuntos);
             jTextField2.setText("");
             jButton3.setEnabled(false);
@@ -620,6 +624,30 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     /**
+     * Establece el idioma indicado en la configuracion
+     */
+    private void setIdiomaInterfaz() {
+        jTabbedPane1.setTitleAt(0, this.config.getPalabra(45));
+        jTabbedPane1.setTitleAt(1, this.config.getPalabra(46));
+        jButton1.setText(this.config.getPalabra(47));
+        jButton2.setText(this.config.getPalabra(48));
+        jLabel1.setText(this.config.getPalabra(49));
+        jButton3.setText(this.config.getPalabra(50));
+        jLabel2.setText(this.config.getPalabra(51));
+        jLabel8.setText(this.config.getPalabra(52));
+        jLabel3.setText(this.config.getPalabra(53));
+        jLabel4.setText(this.config.getPalabra(54));
+        jLabel5.setText(this.config.getPalabra(55));
+        jLabel6.setText(this.config.getPalabra(56));
+        jLabel7.setText(this.config.getPalabra(57));
+        jButton4.setText(this.config.getPalabra(58));
+        jButton5.setText(this.config.getPalabra(59));
+        jButton6.setText(this.config.getPalabra(60));
+        jButton7.setText(this.config.getPalabra(61));
+        jButton8.setText(this.config.getPalabra(21));
+    }
+
+    /**
      * Configura la interfaz con la lista de conjunttos disponibles en el
      * servidor, el conjunto activo actualmene y bloquea los botones de
      * seleccion.
@@ -634,7 +662,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 for (File fichero : ficheros) {
                     jComboBox1.addItem(fichero.getName());
                 }
-                jComboBox1.addItem("Otro");
+                jComboBox1.addItem(this.config.getPalabra(63));
             }
         } catch (IOException ex) {
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
@@ -643,8 +671,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         /////////////////
         /////////////////
         this.modeloTablaConjuntos = new DefaultTableModel();
-        this.modeloTablaConjuntos.addColumn("Nombre");
-        this.modeloTablaConjuntos.addColumn("Idioma");
+        this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
+        this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
         this.tablaConjuntos.setModel(modeloTablaConjuntos);
 
         ///////////////////
@@ -666,7 +694,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         try {
             cargado = this.protocolo.enviarMensaje(4, "");
             if ("-1".equals(cargado)) {
-                jTextField1.setText("Ninguno");
+                jTextField1.setText(this.config.getPalabra(62));
                 jButton4.setEnabled(false);
                 jButton5.setEnabled(false);
                 jButton6.setEnabled(false);
@@ -760,7 +788,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         /**
          * Consructor parametrizado
-         * 
+         *
          * @param jt JTextField de escritura del nombre del conjunto
          * @param bot Boton para crear el conjunto
          */

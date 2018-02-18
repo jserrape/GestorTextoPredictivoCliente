@@ -512,10 +512,10 @@ public class InterfazFrame extends javax.swing.JFrame {
      */
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         if (registrado) {
-            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo, this);
+            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo, this,this.config);
             conf.setVisible(true);
         } else {
-            LoginFrame log = new LoginFrame(this, true, this.protocolo, this);
+            LoginFrame log = new LoginFrame(this, true, this.protocolo, this,this.config);
             log.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
@@ -637,7 +637,7 @@ public class InterfazFrame extends javax.swing.JFrame {
      * @param evt Evento de pulsar el un boton
      */
     private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
-        BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1);
+        BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1,this.config);
         buscar.setVisible(true);
     }//GEN-LAST:event_itemBuscarActionPerformed
 

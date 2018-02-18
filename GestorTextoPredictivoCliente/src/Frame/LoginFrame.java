@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import util.Configuracion;
 import util.ProtocoloConexion;
 
 /**
@@ -22,19 +23,24 @@ public class LoginFrame extends javax.swing.JDialog {
 
     private final ProtocoloConexion protocolo;
     private final InterfazFrame interfaz;
+    private final Configuracion config;
 
     /**
      * Consttructor parametrizado
      *
      * @param parent Clase frame que invoca a LoginFrame
      * @param modal Modo del JDialog
-     * @param protocolo Clase con las funciones para la comunicación con el servidor
+     * @param protocolo Clase con las funciones para la comunicación con el
+     * servidor
      * @param inter Interfaz principal de escritura
+     * @param conf
      */
-    public LoginFrame(java.awt.Frame parent, boolean modal, ProtocoloConexion protocolo, InterfazFrame inter) {
+    public LoginFrame(java.awt.Frame parent, boolean modal, ProtocoloConexion protocolo, InterfazFrame inter, Configuracion conf) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.config = conf;
+        setIdiomaInterfaz();
 
         this.protocolo = protocolo;
         this.interfaz = inter;
@@ -86,6 +92,15 @@ public class LoginFrame extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Contraseña");
+
+        jTextField1.setText("juan.carlos.wow.95@gmail.com");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.setText("64750");
 
         botonAcceder.setText("Acceder");
         botonAcceder.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +269,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
     /**
      * Solicita al servidor regisrarse
-     * 
+     *
      * @param evt Accion del boton
      */
     private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
@@ -275,7 +290,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
     /**
      * Cierra el frame
-     * 
+     *
      * @param evt Accion del boton
      */
     private void botonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelar2ActionPerformed
@@ -284,7 +299,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
     /**
      * Cierra el frame
-     * 
+     *
      * @param evt Accion del boton
      */
     private void botonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelar1ActionPerformed
@@ -293,7 +308,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
     /**
      * Solicita al servidor acceder a una cuenta
-     * 
+     *
      * @param evt Accion del boton
      */
     private void botonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAccederActionPerformed
@@ -311,6 +326,10 @@ public class LoginFrame extends javax.swing.JDialog {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonAccederActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -338,7 +357,27 @@ public class LoginFrame extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Listener de escritura en los campos del login 
+     * Establece el idioma indicado en la configuracion
+     */
+    private void setIdiomaInterfaz() {
+        jTabbedPane1.setTitleAt(0, this.config.getPalabra(36));
+        jTabbedPane1.setTitleAt(1, this.config.getPalabra(37));
+        jLabel1.setText(this.config.getPalabra(38));
+        jLabel2.setText(this.config.getPalabra(39));
+        botonAcceder.setText(this.config.getPalabra(21));
+        botonCancelar1.setText(this.config.getPalabra(22));
+        jLabel8.setText(this.config.getPalabra(43));
+        jLabel7.setText(this.config.getPalabra(44));
+        jLabel3.setText(this.config.getPalabra(40));
+        jLabel4.setText(this.config.getPalabra(41));
+        jLabel5.setText(this.config.getPalabra(38));
+        jLabel6.setText(this.config.getPalabra(42));
+        botonRegistrarse.setText(this.config.getPalabra(37));
+        botonCancelar2.setText(this.config.getPalabra(22));
+    }
+
+    /**
+     * Listener de escritura en los campos del login
      */
     private class listenerLogin implements KeyListener {
 
@@ -347,7 +386,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
         /**
          * Consructor parametrizado
-         * 
+         *
          * @param mail JTextField del correo
          * @param pass JTextField de la conraseña
          */
@@ -393,7 +432,7 @@ public class LoginFrame extends javax.swing.JDialog {
     }
 
     /**
-     * Listener de escritura en los campos de regisro 
+     * Listener de escritura en los campos de regisro
      */
     private class listenerRegistro implements KeyListener {
 
@@ -404,10 +443,10 @@ public class LoginFrame extends javax.swing.JDialog {
 
         /**
          * Consructor parametrizado
-         * 
+         *
          * @param nombre JTextField del nombre
          * @param app JTextField de los apellidos
-         * @param mail1 JTextField del correo 
+         * @param mail1 JTextField del correo
          * @param mail2 JTextField de repetir el correo
          */
         public listenerRegistro(JTextField nombre, JTextField app, JTextField mail1, JTextField mail2) {
