@@ -57,7 +57,7 @@ public final class Configuracion {
     public void conectar() {
         cargarConf();
         try {
-            SocketAddress sockaddr = new InetSocketAddress("192.168.0.101", 4444);
+            SocketAddress sockaddr = new InetSocketAddress("localhost", 4444);
             socket = new Socket();
             socket.connect(sockaddr, 1000);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);

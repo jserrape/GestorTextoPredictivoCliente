@@ -15,7 +15,7 @@ public class Main {
         
         InterfazFrame interfaz = new InterfazFrame();
         interfaz.setVisible(true);
-        
+      
     }
 
 }
