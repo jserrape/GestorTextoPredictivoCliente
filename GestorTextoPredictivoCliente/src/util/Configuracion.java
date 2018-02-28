@@ -57,7 +57,7 @@ public final class Configuracion {
     public void conectar() {
         cargarConf();
         try {
-            SocketAddress sockaddr = new InetSocketAddress("localhost", 4444);
+            SocketAddress sockaddr = new InetSocketAddress("192.168.0.103", 4444);
             socket = new Socket();
             socket.connect(sockaddr, 1000);
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
@@ -65,7 +65,6 @@ public final class Configuracion {
             stdIn = new BufferedReader(new InputStreamReader(System.in));
             this.interfaz.conexionCorrecta();
         } catch (IOException ex) {
-            System.out.println("FALLO AL CONECTAR CON EL SERVIDOR");
             this.interfaz.errorConexion();
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }

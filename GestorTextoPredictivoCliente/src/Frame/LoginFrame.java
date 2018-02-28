@@ -101,7 +101,12 @@ public class LoginFrame extends javax.swing.JDialog {
             }
         });
 
-        jTextField2.setText("80680");
+        jTextField2.setText("40333");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         botonAcceder.setText("Acceder");
         botonAcceder.addActionListener(new java.awt.event.ActionListener() {
@@ -275,9 +280,7 @@ public class LoginFrame extends javax.swing.JDialog {
      */
     private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
         try {
-            String aux = this.protocolo.enviarMensaje(9, this.fieldNombre.getText() + "#" + this.fieldApellidos.getText() + "#" + this.fieldMail1.getText());
-            System.out.println("Aux:" + aux);
-            if ("-1".equals(aux)) {
+            if ("-1".equals(this.protocolo.enviarMensaje(9, this.fieldNombre.getText() + "#" + this.fieldApellidos.getText() + "#" + this.fieldMail1.getText()))) {
                 jLabel7.setVisible(true);
             } else {
                 this.dispose();
@@ -314,7 +317,7 @@ public class LoginFrame extends javax.swing.JDialog {
      */
     private void botonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAccederActionPerformed
         try {
-            if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + DigestUtils.sha1Hex(jTextField2.getText())))) {
+            if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + /*DigestUtils.sha1Hex*/(jTextField2.getText())))) {
                 jLabel8.setVisible(true);
             } else {
                 this.interfaz.logear();
@@ -331,6 +334,10 @@ public class LoginFrame extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

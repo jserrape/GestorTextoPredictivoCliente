@@ -42,21 +42,15 @@ public class PopUpMenu {
      * @param strResultado Cadena de texo con las predicciones
      */
     public void mostrar(KeyEvent ke, int x, int y, String strResultado) {
-
         this.jpopMenu.setVisible(false);
         this.jpopMenu.removeAll();
-
-        String[] predicciones = strResultado.split(", ");
-
         JMenuItem item;
-
-        for (String prediccione : predicciones) {
+        for (String prediccione : strResultado.split(", ")) {
             item = new JMenuItem(prediccione);
             this.jpopMenu.add(item);
             item.addActionListener(new ActionListenerImpl(jt));
             item.addMenuKeyListener(new MenuKeyListenerImpl(jt, item, this));
         }
-
         this.jpopMenu.show(ke.getComponent(), x, y);
         this.jt.requestFocus();
     }
@@ -108,10 +102,7 @@ public class PopUpMenu {
                     semilla = jt.getText().substring(jt.getCaretPosition() - 10, jt.getCaretPosition());
                 }
                 String[] palabras = semilla.split("\\s+");
-                String palabraInacabada = palabras[palabras.length - 1];
-                String prediccionRecortada = e.getActionCommand().substring(palabraInacabada.length(), e.getActionCommand().length());
-
-                sb.insert(jt.getCaretPosition(), prediccionRecortada + " ");
+                sb.insert(jt.getCaretPosition(), e.getActionCommand().substring(palabras[palabras.length - 1].length(), e.getActionCommand().length()) + " ");
             } else {
                 sb.insert(jt.getCaretPosition(), e.getActionCommand() + " ");
             }
@@ -177,10 +168,7 @@ public class PopUpMenu {
                         semilla = jt.getText().substring(jt.getCaretPosition() - 10, jt.getCaretPosition());
                     }
                     String[] palabras = semilla.split("\\s+");
-                    String palabraInacabada = palabras[palabras.length - 1];
-                    String prediccionRecortada = this.item.getText().substring(palabraInacabada.length(), this.item.getText().length());
-
-                    sb.insert(jt.getCaretPosition(), prediccionRecortada + " ");
+                    sb.insert(jt.getCaretPosition(), this.item.getText().substring(palabras[palabras.length - 1].length(), this.item.getText().length()) + " ");
                 } else {
                     sb.insert(jt.getCaretPosition(), this.item.getText() + " ");
                 }

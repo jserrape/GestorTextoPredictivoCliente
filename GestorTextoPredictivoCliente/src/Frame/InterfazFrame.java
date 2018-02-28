@@ -615,7 +615,6 @@ public class InterfazFrame extends javax.swing.JFrame {
     private void itemFechaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFechaHoraActionPerformed
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-        System.out.println(this.jTextArea1.getCaretPosition() + "");
         StringBuilder sb = new StringBuilder(this.jTextArea1.getText());
         sb.insert(this.jTextArea1.getCaretPosition(), hourdateFormat.format(date));
         this.jTextArea1.setText(sb.toString());
@@ -993,7 +992,6 @@ public class InterfazFrame extends javax.swing.JFrame {
          */
         @Override
         public void keyReleased(KeyEvent ke) {
-            System.out.println(ke.getKeyCode());
             if (ke.getKeyCode() == 40 || ke.getKeyCode() == 38) {
                 this.popMenu.darFoco();
             } else {

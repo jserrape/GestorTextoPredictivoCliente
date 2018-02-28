@@ -157,7 +157,6 @@ public class IdiomaFrame extends javax.swing.JDialog {
      * @param evt Accion del boton
      */
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        System.out.println(this.jList2.getSelectedValue());
         if (!this.confi.getIdioma().equals(this.jList2.getSelectedValue())) {
             this.confi.cargarIdioma(this.jList2.getSelectedValue());
             setIdiomaInterfaz();

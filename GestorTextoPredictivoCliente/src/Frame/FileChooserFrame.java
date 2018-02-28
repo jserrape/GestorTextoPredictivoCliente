@@ -121,7 +121,6 @@ public class FileChooserFrame extends javax.swing.JDialog {
             }
         } else {
             if (command.equals(JFileChooser.CANCEL_SELECTION)) {
-                System.out.println("He dado a cancelar");
                 this.dispose();
             }
         }
@@ -161,13 +160,9 @@ public class FileChooserFrame extends javax.swing.JDialog {
     private void abrir(java.awt.event.ActionEvent evt) {
         JFileChooser selector = (JFileChooser) evt.getSource();
         String command = evt.getActionCommand();
-        System.out.println(evt);
         if (command.equals(JFileChooser.APPROVE_SELECTION)) {
-            File archivoSeleccionado = selector.getSelectedFile();
-            System.out.println(archivoSeleccionado.getAbsolutePath());
             File ficheroE = new File(this.jFileChooser1.getSelectedFile().getAbsolutePath());
             if (ficheroE.exists()) {
-                System.out.println("El fichero existe");
                 if (".txt".equals(ficheroE.getName().substring(ficheroE.getName().indexOf("."), ficheroE.getName().length()).toLowerCase())) {
                     abrirTxT();
                 } else {
@@ -176,8 +171,6 @@ public class FileChooserFrame extends javax.swing.JDialog {
                     }
                 }
                 this.dispose();
-            } else {
-                System.out.println("El fichero NO existe");
             }
         } else {
             if (command.equals(JFileChooser.CANCEL_SELECTION)) {

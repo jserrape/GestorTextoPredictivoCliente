@@ -375,17 +375,14 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
-            System.out.println(this.tablaConjuntos.getSelectedRow());
             String lista;
             try {
                 lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
-                System.out.println("Lista: " + lista);
                 this.modeloTablaConjuntos = new DefaultTableModel();
                 this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
                 this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
                 this.tablaConjuntos.setModel(modeloTablaConjuntos);
                 if (!"".equals(lista)) {
-                    System.out.println(lista);
                     if (!"-1".equals(lista)) {
                         lista = lista.substring(1, lista.length() - 1);
                         String[] parts = lista.split(", ");
@@ -429,13 +426,10 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         String textoAEnviar = jTextField2.getText() + "#" + jComboBox1.getSelectedItem().toString() + "#" + tMax
                 + "#" + tMin + "#" + (int) jtamPrediccion.getValue()
                 + "#" + (int) jtManPredicciones.getValue();
-
-        System.out.println("Conjunto a crear:" + textoAEnviar);
         String lista;
         try {
             lista = this.protocolo.enviarMensaje(2, textoAEnviar);
 
-            System.out.println("lista:" + lista);
             this.modeloTablaConjuntos = new DefaultTableModel();
             this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
             this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
@@ -496,8 +490,6 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             this.nuevaFilaTablaFicheros("Directorio", chooser.getSelectedFile().toString());
-        } else {
-            System.out.println("No Selection ");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 

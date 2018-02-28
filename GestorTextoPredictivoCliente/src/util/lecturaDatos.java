@@ -45,9 +45,10 @@ public class lecturaDatos {
      * @throws IOException Excepción en caso de error en el fichero
      */
     private String nuevoPDF(String filePath) throws IOException {
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
         File file = new File(filePath);
         PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
-
         parser.parse();
         String tx;
         try (COSDocument cosDoc = parser.getDocument()) {
@@ -59,8 +60,8 @@ public class lecturaDatos {
 
             tx = pdfStripper.getText(pdDoc);
         }
-
-        //System.out.println(tx);
+        time_end = System.currentTimeMillis();
+        System.out.println("the task has taken " + (time_end - time_start) + " milliseconds");
         return tx;
     }
 
@@ -85,7 +86,6 @@ public class lecturaDatos {
                 in.close();
             }
         }
-        System.out.println(Jsoup.parse(all).text());
         return Jsoup.parse(all).text();
     }
 }
