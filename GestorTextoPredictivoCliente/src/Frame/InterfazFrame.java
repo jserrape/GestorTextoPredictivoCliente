@@ -7,6 +7,7 @@ package Frame;
 
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -64,6 +65,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     public InterfazFrame() throws BadLocationException, FileNotFoundException {
         initComponents();
         setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
         inicializar();
 
         //addWindowListener(new listenerCerrarVenana(protocolo));
