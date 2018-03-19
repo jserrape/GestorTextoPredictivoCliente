@@ -9,6 +9,7 @@ import Frame.InterfazFrame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,9 +19,22 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  *
@@ -28,7 +42,7 @@ import java.util.logging.Logger;
  */
 public final class Configuracion {
 
-    private Socket socket;
+    private SSLSocket socket;
     private PrintWriter out;
     private BufferedReader in;
     private BufferedReader stdIn;
@@ -37,6 +51,9 @@ public final class Configuracion {
     private ArrayList<String> palabras;
 
     private final InterfazFrame interfaz;
+
+    private String address = "192.168.0.101";
+    private int port = 4444;
 
     /**
      * Constructor por defecto de la clase Configuracion
@@ -57,9 +74,11 @@ public final class Configuracion {
     public void conectar() {
         cargarConf();
         try {
-            SocketAddress sockaddr = new InetSocketAddress("192.168.0.103", 4444);
-            socket = new Socket();
-            socket.connect(sockaddr, 1000);
+            try {
+                ssl();
+            } catch (KeyStoreException | FileNotFoundException | NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException | KeyManagementException ex) {
+                Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+            }
             out = new PrintWriter(getKkSocket().getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(getKkSocket().getInputStream()));
             stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -83,6 +102,29 @@ public final class Configuracion {
         } catch (IOException ex) {
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void ssl() throws KeyStoreException, FileNotFoundException, NoSuchAlgorithmException, UnrecoverableKeyException, IOException, CertificateException, KeyManagementException {
+        KeyStore keyStore = KeyStore.getInstance("JKS");
+        keyStore.load(new FileInputStream("certs/client/clientKey.jks"), "clientpass".toCharArray());
+
+        KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        kmf.init(keyStore, "clientpass".toCharArray());
+
+        KeyStore trustedStore = KeyStore.getInstance("JKS");
+        trustedStore.load(new FileInputStream("certs/client/clientTrustedCerts.jks"), "clientpass".toCharArray());
+
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        tmf.init(trustedStore);
+
+        SSLContext sc = SSLContext.getInstance("TLS");
+        TrustManager[] trustManagers = tmf.getTrustManagers();
+        KeyManager[] keyManagers = kmf.getKeyManagers();
+        sc.init(keyManagers, trustManagers, null);
+
+        SSLSocketFactory ssf = sc.getSocketFactory();
+        socket = (SSLSocket) ssf.createSocket(address, port);
+        socket.startHandshake();
     }
 
     /**
@@ -479,33 +521,33 @@ public final class Configuracion {
         BufferedWriter bw;
         try {
             bw = new BufferedWriter(new FileWriter(archivo));
-            
+
             bw.close();
         } catch (IOException ex) {
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void escribirFicheroIdiomaItaliano() {
         String ruta = "./idioma/Italiano";
         File archivo = new File(ruta);
         BufferedWriter bw;
         try {
             bw = new BufferedWriter(new FileWriter(archivo));
-            
+
             bw.close();
         } catch (IOException ex) {
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void escribirFicheroIdiomaPortugues() {
         String ruta = "./idioma/Portugues";
         File archivo = new File(ruta);
         BufferedWriter bw;
         try {
             bw = new BufferedWriter(new FileWriter(archivo));
-            
+
             bw.close();
         } catch (IOException ex) {
             Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
