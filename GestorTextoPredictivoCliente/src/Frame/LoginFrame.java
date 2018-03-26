@@ -317,7 +317,7 @@ public class LoginFrame extends javax.swing.JDialog {
      */
     private void botonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAccederActionPerformed
         try {
-            if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + /*DigestUtils.sha1Hex*/(jTextField2.getText())))) {
+            if ("-1".equals(this.protocolo.enviarMensaje(8, jTextField1.getText() + "#" + DigestUtils.sha1Hex(jTextField2.getText())))) {
                 jLabel8.setVisible(true);
             } else {
                 this.interfaz.logear();
