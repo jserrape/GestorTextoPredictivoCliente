@@ -483,7 +483,6 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         JFileChooser chooser = new JFileChooser();
 
-        chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle("choosertitle");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setAcceptAllFileFilterUsed(false);
@@ -645,7 +644,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * seleccion.
      */
     private void configuracionInicial() {
-        File miDir = new File(".\\idioma");
+        File miDir = new File("./idioma");
         File f;
         try {
             f = new File(miDir.getCanonicalPath());

@@ -52,8 +52,8 @@ public final class Configuracion {
 
     private final InterfazFrame interfaz;
 
-    private String address = "192.168.0.105";
-    private int port = 4444;
+    private final String address = "192.168.0.105";
+    private final int port = 4444;
 
     /**
      * Constructor por defecto de la clase Configuracion
