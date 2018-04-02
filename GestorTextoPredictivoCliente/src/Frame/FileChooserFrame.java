@@ -111,7 +111,7 @@ public class FileChooserFrame extends javax.swing.JDialog {
         if (command.equals(JFileChooser.APPROVE_SELECTION)) {
             File ficheroE = new File(this.jFileChooser1.getSelectedFile().getAbsolutePath());
             if (ficheroE.exists()) {
-                int result = JOptionPane.showConfirmDialog((Component) null, this.jFileChooser1.getSelectedFile().getName() + " ya existe.\n¿Desea reemplazarlo?", "alert", JOptionPane.OK_CANCEL_OPTION);
+                int result = JOptionPane.showConfirmDialog((Component) null, this.jFileChooser1.getSelectedFile().getName() + " ya existe.\n¿Desea reemplazarlo?", "", JOptionPane.OK_CANCEL_OPTION);
                 if (result == 0) {
                     ficheroE.delete();
                     crearFichero(this.jFileChooser1.getSelectedFile().getAbsolutePath());

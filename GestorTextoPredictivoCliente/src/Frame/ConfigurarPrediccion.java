@@ -5,6 +5,7 @@
  */
 package Frame;
 
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -375,37 +376,40 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
-            String lista;
-            try {
-                lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
-                this.modeloTablaConjuntos = new DefaultTableModel();
-                this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
-                this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
-                this.tablaConjuntos.setModel(modeloTablaConjuntos);
-                if (!"".equals(lista)) {
-                    if (!"-1".equals(lista)) {
-                        lista = lista.substring(1, lista.length() - 1);
-                        String[] parts = lista.split(", ");
-                        String[] part2;
-                        for (String part : parts) {
-                            part2 = part.split("#");
-                            this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+            int result = JOptionPane.showConfirmDialog((Component) null, "¿Dese eliminar el conjunto seleccionado?", "", JOptionPane.OK_CANCEL_OPTION);
+            if (result == 0) {
+                String lista;
+                try {
+                    lista = this.protocolo.enviarMensaje(3, this.tablaConjuntos.getValueAt(this.tablaConjuntos.getSelectedRow(), 0).toString());
+                    this.modeloTablaConjuntos = new DefaultTableModel();
+                    this.modeloTablaConjuntos.addColumn(this.config.getPalabra(40));
+                    this.modeloTablaConjuntos.addColumn(this.config.getPalabra(20));
+                    this.tablaConjuntos.setModel(modeloTablaConjuntos);
+                    if (!"".equals(lista)) {
+                        if (!"-1".equals(lista)) {
+                            lista = lista.substring(1, lista.length() - 1);
+                            String[] parts = lista.split(", ");
+                            String[] part2;
+                            for (String part : parts) {
+                                part2 = part.split("#");
+                                this.nuevaFilaTablaConjuntos(part2[0], part2[1]);
+                            }
+                            this.tablaConjuntos.setRowSelectionInterval(0, 0);
                         }
-                        this.tablaConjuntos.setRowSelectionInterval(0, 0);
                     }
+                    jTextField1.setText(this.config.getPalabra(62));
+                    jButton4.setEnabled(false);
+                    jButton5.setEnabled(false);
+                    jButton6.setEnabled(false);
+                    jButton7.setEnabled(false);
+                    jButton8.setEnabled(false);
+                    jLabel7.setVisible(true);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                    this.interfaz.errorConexion();
+                    this.dispose();
+                    Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jTextField1.setText(this.config.getPalabra(62));
-                jButton4.setEnabled(false);
-                jButton5.setEnabled(false);
-                jButton6.setEnabled(false);
-                jButton7.setEnabled(false);
-                jButton8.setEnabled(false);
-                jLabel7.setVisible(true);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
-                this.interfaz.errorConexion();
-                this.dispose();
-                Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

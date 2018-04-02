@@ -52,7 +52,7 @@ public final class Configuracion {
 
     private final InterfazFrame interfaz;
 
-    private final String address = "192.168.0.105";
+    private final String address = "localhost";
     private final int port = 4444;
 
     /**

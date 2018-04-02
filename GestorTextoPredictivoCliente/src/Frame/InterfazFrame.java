@@ -5,6 +5,7 @@
  */
 package Frame;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -68,7 +69,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
         inicializar();
 
-        //addWindowListener(new listenerCerrarVenana(protocolo));
+        addWindowListener(new listenerCerrarVentana(protocolo));
     }
 
     @SuppressWarnings("unchecked")
@@ -486,13 +487,16 @@ public class InterfazFrame extends javax.swing.JFrame {
      * @param evt Evento de pulsar el un boton
      */
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        try {
-            this.protocolo.enviarMensaje(0, "");
-            this.dispose();
-        } catch (IOException ex) {
-            this.errorConexion();
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+        int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea cerrar la aplicación?", "", JOptionPane.OK_CANCEL_OPTION);
+        if (result == 0) {
+            try {
+                this.protocolo.enviarMensaje(0, "");
+                this.dispose();
+            } catch (IOException ex) {
+                this.errorConexion();
+                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -514,10 +518,10 @@ public class InterfazFrame extends javax.swing.JFrame {
      */
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         if (registrado) {
-            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo, this,this.config);
+            ConfigurarPrediccion conf = new ConfigurarPrediccion(this, true, this.protocolo, this, this.config);
             conf.setVisible(true);
         } else {
-            LoginFrame log = new LoginFrame(this, true, this.protocolo, this,this.config);
+            LoginFrame log = new LoginFrame(this, true, this.protocolo, this, this.config);
             log.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem18ActionPerformed
@@ -638,7 +642,7 @@ public class InterfazFrame extends javax.swing.JFrame {
      * @param evt Evento de pulsar el un boton
      */
     private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
-        BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1,this.config);
+        BuscarFrame buscar = new BuscarFrame(this, true, this.jTextArea1, this.config);
         buscar.setVisible(true);
     }//GEN-LAST:event_itemBuscarActionPerformed
 
@@ -697,9 +701,12 @@ public class InterfazFrame extends javax.swing.JFrame {
      * @param evt Evento de pulsar el un boton
      */
     private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionActionPerformed
-        this.registrado = false;
-        itemCerrarSesion.setVisible(false);
-        separadorSesion.setVisible(false);
+        int result = JOptionPane.showConfirmDialog((Component) null, "¿Dese cerrar sesión?", "alert", JOptionPane.OK_CANCEL_OPTION);
+        if (result == 0) {
+            this.registrado = false;
+            itemCerrarSesion.setVisible(false);
+            separadorSesion.setVisible(false);
+        }
     }//GEN-LAST:event_itemCerrarSesionActionPerformed
 
 
@@ -1224,20 +1231,23 @@ public class InterfazFrame extends javax.swing.JFrame {
     /**
      * Lisener para cerrar la conexión con el servidor al cerrar la ventana
      */
-    private static class listenerCerrarVenana extends WindowAdapter {
+    private static class listenerCerrarVentana extends WindowAdapter {
 
         private final ProtocoloConexion protocolo;
 
-        public listenerCerrarVenana(ProtocoloConexion protocolo) {
+        public listenerCerrarVentana(ProtocoloConexion protocolo) {
             this.protocolo = protocolo;
         }
 
         @Override
         public void windowClosing(java.awt.event.WindowEvent evt) {
-            try {
-                this.protocolo.enviarMensaje(0, "");
-            } catch (IOException ex) {
-                Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+            int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea cerrar la aplicación?", "", JOptionPane.OK_CANCEL_OPTION);
+            if (result == 0) {
+                try {
+                    this.protocolo.enviarMensaje(0, "");
+                } catch (IOException ex) {
+                    Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
