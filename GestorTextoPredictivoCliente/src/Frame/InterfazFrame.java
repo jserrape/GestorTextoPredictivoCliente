@@ -56,7 +56,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private boolean registrado;
 
     /**
-     * Construcor parametrizado
+     * Construcor por defecto
      *
      * @throws javax.swing.text.BadLocationException Ubicación incorrecta dentro
      * de un modelo de documento
@@ -67,8 +67,24 @@ public class InterfazFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
-        inicializar();
-
+        inicializar("-1");
+        addWindowListener(new listenerCerrarVentana(protocolo));
+    }
+    
+        /**
+     * Construcor parametrizado
+     *
+     * @param ip Ip del servidor
+     * @throws javax.swing.text.BadLocationException Ubicación incorrecta dentro
+     * de un modelo de documento
+     * @throws java.io.FileNotFoundException Intento de abrir el archivo
+     * denotado por un nombre de ruta especificado ha fallado.
+     */
+    public InterfazFrame(String ip) throws BadLocationException, FileNotFoundException {
+        initComponents();
+        setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
+        inicializar(ip);
         addWindowListener(new listenerCerrarVentana(protocolo));
     }
 
@@ -812,12 +828,12 @@ public class InterfazFrame extends javax.swing.JFrame {
     /**
      * Inicializa las variables a sus estados iniciales
      */
-    private void inicializar() {
+    private void inicializar(String ip) {
         itemCerrarSesion.setVisible(false);
         separadorSesion.setVisible(false);
         botonError.setVisible(false);
         jMenuItem18.setEnabled(true);
-        config = new Configuracion(this);
+        config = new Configuracion(this,ip);
         setIdiomaInterfaz();
         registrado = false;
         protocolo = new ProtocoloConexion(config);

@@ -52,16 +52,22 @@ public final class Configuracion {
 
     private final InterfazFrame interfaz;
 
-    private final String address = "localhost";
+    private final String address;
     private final int port = 4444;
 
     /**
      * Constructor por defecto de la clase Configuracion
      *
      * @param interfaz Clase de la interfaz principal
+     * @param ip Ip del servidor
      */
-    public Configuracion(InterfazFrame interfaz) {
+    public Configuracion(InterfazFrame interfaz, String ip) {
         this.interfaz = interfaz;
+        if ("-1".equals(ip)) {
+            address = "localhost";
+        } else {
+            address = ip;
+        }
         conectar();
 
         escribirFicheroIdiomaEspanol();
