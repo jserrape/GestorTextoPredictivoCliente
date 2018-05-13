@@ -1,0 +1,90 @@
+Arquivo
+Editar
+Ajustes
+Ajuda
+Novo
+Aberto
+Salvar
+Salvar como...
+Saída
+Desfazer
+Cortar
+Copiar
+Colar
+Excluir
+Pesquisar ...
+Substituir
+Selecionar tudo
+Hora e data
+Formato
+Previsão
+Idioma
+Aceitar
+Cancelar
+Escolha o idioma da interface
+Selecione um dos seguintes idiomas para a interface
+Fonte
+Estilo da fonte
+Tamanho
+Amostra
+Normal
+Negrito
+Cursivo
+Adicionar novo URL:
+Adicionar novo URL
+Gerenciador de texto preditivo com fonte de dados configurável
+Seleção de idioma
+Acesso
+Cadastre-se
+Mail
+Senha
+Nome
+Apelido
+Repetir correio
+Nome de usuário ou senha errada
+Já existe um usuário com esse email
+Selecione o conjunto
+Adicione documentos
+Upload
+Excluir
+DataSet carregado:
+Criar novo conjunto
+Nome do conjunto:
+Língua do conjunto
+Tamanho máximo da semente
+Tamanho mínimo da semente
+Tamanho da previsão
+Previsões máximas
+Você deve ter um conjunto de dados carregado para poder adicionar documentos.
+Novo arquivo
+Novo diretório
+Novo html
+Excluir
+Nenhum
+Outro
+Pesquisa:
+Corresponder maiúsculas e minúsculas
+Pesquisar próximo
+Veja a Ajuda
+1) Área de escrita do usuário, na qual o usuário irá escrever o texto no qual as previsões serão feitas.
+2) Botão que informa se houve uma desconexão com o servidor, através do qual você pode tentar se reconectar.
+3) Opção que permite alterar o idioma da interface.
+4) Opção de previsão através da qual você pode efetuar login ou registrar-se no sistema e usar conjuntos de dados depois de registrados.
+1) Tabela de conjuntos disponíveis para o usuário.
+2) Recurso para criar um novo conjunto de dados a partir de um nome de conjunto, uma linguagem e as características da previsão.
+3) Campo indicando o conjunto de dados carregados
+4) Botão para carregar um conjunto selecionado.
+5) Botão para excluir um conjunto selecionado.
+1) Botão para selecionar um arquivo, diretório ou endereço da web para adicioná-lo ao conjunto de dados ativo.
+2) Botão para excluir um documento selecionado anteriormente.
+3) Botão para carregar os documentos da tabela.
+4) Tabela com os documentos que serão adicionados.
+Você quer fechar o aplicativo?
+Não foi possível encontrar
+Você deseja excluir o conjunto selecionado?
+A conexão com o servidor foi perdida.
+Erro de conexão
+Anterior
+Próximo
+Digite
+Endereço

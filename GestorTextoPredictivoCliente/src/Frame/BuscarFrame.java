@@ -8,6 +8,7 @@ package Frame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import util.Configuracion;
 
 /**
@@ -148,7 +149,9 @@ public class BuscarFrame extends javax.swing.JDialog {
                 posCaret = strBusco.length() + posIni;
             } else {
                 this.jTextArea.select(0, 0);
-                JOptionPane.showMessageDialog(null, "No se encontró '" + strBusco + "'");
+                UIManager.put("OptionPane.okButtonText", this.config.getPalabra(21));
+                UIManager.put("OptionPane.cancelButtonText", this.config.getPalabra(22));
+                JOptionPane.showMessageDialog(null, this.config.getPalabra(82)+" '" + strBusco + "'");
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,0 +1,90 @@
+Archives
+Modifier
+Ajustements
+Aide
+Nouveau
+Ouvrir
+Sauvegarder
+Garder comme...
+Sortir
+Annuler
+Couper
+Copier
+Coller
+Supprimer
+Rechercher ...
+Remplacer
+Tout sélectionner
+Heure et date
+Format
+Prédiction
+langage
+Accepter
+Annuler
+Choisissez la langue de l'interface
+Sélectionnez l'une des langues suivantes pour l'interface
+Source
+Style de police
+Taille
+Échantillon
+Normal
+Gras
+Cursive
+Ajouter une nouvelle URL:
+Ajouter une nouvelle URL
+Gestionnaire de texte prédictif avec source de données configurable
+Sélection de la langue
+Accès
+S'enregistrer
+Mail
+Password
+nom
+Nom
+Répétez le mail
+Mauvais nom d'utilisateur ou mot de passe
+Il y a déjà un utilisateur avec cet email
+Sélectionner un ensemble
+Ajouter des documents
+Télécharger
+Supprimer
+DataSet chargé:
+Créer un nouvel ensemble
+Nom de l'ensemble:
+Langue de l'ensemble
+Taille maximale de la graine
+Taille minimale de la graine
+Taille de la prédiction
+Prédictions maximales
+Vous devez avoir un ensemble de données chargé pour pouvoir ajouter des documents.
+Nouveau fichier
+Nouveau répertoire
+Nouveau html
+Supprimer
+Aucun
+Autre
+Rechercher:
+Correspond aux majuscules et aux minuscules
+Rechercher suivant
+Voir l'aide
+1) Zone d'écriture de l'utilisateur, dans laquelle l'utilisateur écrira le texte sur lequel les prédictions seront faites.
+2) Bouton qui informe s'il y a eu une déconnexion avec le serveur, à travers lequel vous pouvez essayer de vous reconnecter.
+3) Option qui permet de changer la langue de l'interface.
+4) Option de prédiction à travers laquelle vous pouvez vous connecter ou vous enregistrer dans le système, et utiliser les ensembles de données une fois enregistrés.
+1) Tableau des ensembles disponibles pour l'utilisateur.
+2) Feature pour créer un nouvel ensemble de données à partir d'un nom d'ensemble, d'une langue et des caractéristiques de la prédiction.
+3) Champ indiquant l'ensemble des données chargées
+4) Bouton pour charger un ensemble sélectionné.
+5) Bouton pour supprimer un ensemble sélectionné.
+1) Bouton permettant de sélectionner un fichier, un répertoire ou une adresse Web pour l'ajouter à l'ensemble de données actif.
+2) Bouton pour supprimer un document précédemment sélectionné.
+3) Bouton pour charger les documents de la table.
+4) Table avec les documents qui seront ajoutés.
+Voulez-vous fermer l'application?
+Impossible de trouver
+Voulez-vous supprimer l'ensemble sélectionné?
+La connexion au serveur a été perdue.
+Erreur de connexion
+Précédent
+Suivant
+Type
+adresse

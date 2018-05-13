@@ -1,67 +1,90 @@
 Archive
 Edit
-Settings
+Adjustments
 Help
 New
 Open
-Save
+save
 Save as...
-Close
+Get out
 Undo
 Cut
 Copy
 Paste
 Remove
-Find...
+Search...
 Replace
 Select all
 Time and date
 Format
 Prediction
 Language
-Accept
+To accept
 Cancel
 Choose interface language
-Select one of the following languages ​​for the interface:
-Font
+Select one of the following languages ​​for the interface
+Source
 Font style
 Size
 Sample
 Normal
-Bold
+Bold font
 Italics
 Add new url:
 Add new url
 Predictive text manager with configurable data source
 Language selection
-Log in
-Sign in
-Email
+To access
+Check in
+Mail
 Password
-Name
-Surname
-Repeat email
+First name
+Surnames
+Repeat mail
 Wrong username or password
 There is already a user with that email
 Select set
 Add documents
 Load
-Delete
+Remove
 DataSet loaded:
 Create new set
 Name of the set:
-Set language
-Maximum size of the seed
+Language of the set
+Maximum seed size
 Minimum size of the seed
 Size of the prediction
 Maximum predictions
-You must have a set of data loaded to be able to add documents.
+You must have a data set loaded to be able to add documents.
 New file
 New directory
 New html
 Delete
-None
+Any
 Other
 Search:
-Match case
-Find next
+Match uppercase and lowercase
+Search next
+See Help
+1) User's writing area, in which the user will write the text on which the predictions will be made.
+2) Button that informs if there has been a disconnection with the server, through which you can try to reconnect.
+3) Option that allows to change the interface language.
+4) Prediction option through which you can log in or register in the system, and use data sets once registered.
+1) Table of sets available to the user.
+2) Feature to create a new data set from a set name, a language and the characteristics of the prediction.
+3) Field indicating the set of data loaded
+4) Button to load a selected set.
+5) Button to delete a selected set.
+1) Button to select a file, directory or web address to add it to the active data set.
+2) Button to delete a previously selected document.
+3) Button to load the documents of the table.
+4) Table with the documents that will be added.
+Do you want to close the application?
+It was not found
+Do you want to delete the selected set?
+The connection to the server has been lost.
+Connection error
+Previous
+Following
+Type
+Address

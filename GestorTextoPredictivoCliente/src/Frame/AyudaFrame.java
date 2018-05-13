@@ -29,6 +29,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.config = conf;
+        this.jButton1.setText(this.config.getPalabra(86));
+        this.jButton2.setText(this.config.getPalabra(87));
+        this.jButton2.setText(this.config.getPalabra(21));
         this.jTextArea1.setWrapStyleWord(true);
         this.setTitle(this.config.getPalabra(67));
         ayuda1();
@@ -61,11 +64,8 @@ public class AyudaFrame extends javax.swing.JDialog {
     }
 
     private void siguiente() {
-        System.out.println("Boton");
         if (imagenAyuda < 3) {
-            System.out.println("Entro");
             ++imagenAyuda;
-            System.out.println(imagenAyuda);
             ImageIcon icon = new ImageIcon(this.getClass().getResource("/ayuda/ayuda" + imagenAyuda + ".png"));
             this.jLabel1.setIcon(icon);
             jButton1.setEnabled(true);
@@ -184,7 +184,6 @@ public class AyudaFrame extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println("Boton siguiente");
         siguiente();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -193,7 +192,6 @@ public class AyudaFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("Boton anterior");
         anterior();
     }//GEN-LAST:event_jButton1ActionPerformed
 

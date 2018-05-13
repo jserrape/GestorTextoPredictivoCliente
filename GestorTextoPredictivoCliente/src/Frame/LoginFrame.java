@@ -281,7 +281,7 @@ public class LoginFrame extends javax.swing.JDialog {
                 this.dispose();
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -319,7 +319,7 @@ public class LoginFrame extends javax.swing.JDialog {
                 this.dispose();
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             this.dispose();
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);

@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -377,7 +378,9 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
-            int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea eliminar el conjunto seleccionado?", "", JOptionPane.OK_CANCEL_OPTION);
+            UIManager.put("OptionPane.okButtonText", this.config.getPalabra(21));
+            UIManager.put("OptionPane.cancelButtonText", this.config.getPalabra(22));
+            int result = JOptionPane.showConfirmDialog((Component) null, this.config.getPalabra(83), "", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
                 String lista;
                 try {
@@ -406,7 +409,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                     jButton8.setEnabled(false);
                     jLabel7.setVisible(true);
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
                     this.interfaz.errorConexion();
                     this.dispose();
                     Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
@@ -454,7 +457,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         } catch (IOException ex) {
             this.interfaz.errorConexion();
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
             this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -577,7 +580,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 jLabel7.setVisible(false);
             } catch (IOException ex) {
                 this.interfaz.errorConexion();
-                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
                 this.dispose();
                 Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -673,8 +676,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
         ///////////////////
         ///////////////////
         modeloTablaFicheros = new DefaultTableModel();
-        modeloTablaFicheros.addColumn("Tipo");
-        modeloTablaFicheros.addColumn("Dirección");
+        modeloTablaFicheros.addColumn(this.config.getPalabra(88));
+        modeloTablaFicheros.addColumn(this.config.getPalabra(89));
         this.jTable1.setModel(modeloTablaFicheros);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -701,7 +704,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                 jLabel7.setVisible(false);
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);
@@ -725,7 +728,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
             this.jTextField2.addKeyListener(new listenerCrearConjunto(this.jTextField2, jButton3));
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
             this.interfaz.errorConexion();
             this.dispose();
             Logger.getLogger(ConfigurarPrediccion.class.getName()).log(Level.SEVERE, null, ex);

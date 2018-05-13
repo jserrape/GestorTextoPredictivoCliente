@@ -1,0 +1,90 @@
+Archivio
+Modifica
+Impostazioni
+Aiutare
+Nuovo
+Aperto
+salvare
+Salva come ...
+Uscita
+Disfare
+Taglio
+Copia
+Pasta
+Rimuovere
+Cerca ...
+sostituire
+Seleziona tutto
+Ora e data
+Formato
+Predizione
+Lingua
+Accettare
+Annullare
+Scegli la lingua dell'interfaccia
+Seleziona una delle seguenti lingue per l'interfaccia
+Fonte
+Stile del carattere
+Dimensione
+Campione
+Normale
+Grassetto
+Corsivo
+Aggiungi nuovo URL:
+Aggiungi nuovo URL
+Gestore di testo predittivo con origine dati configurabile
+Selezione della lingua
+Il login
+Registrazione
+posta
+password
+nome
+cognomi
+Ripeti la posta
+Nome utente o password errati
+C'è già un utente con quella email
+Seleziona set
+Aggiungi documenti
+carico
+rimuovere
+DataSet caricato:
+Crea un nuovo set
+Nome del set:
+Lingua del set
+Dimensione massima del seme
+Dimensione minima del seme
+Dimensione della previsione
+Previsioni massime
+È necessario disporre di un set di dati caricato per poter aggiungere documenti.
+Nuovo file
+Nuova directory
+Nuovo html
+cancellare
+nessuno
+un altro
+Ricerca:
+Abbina maiuscole e minuscole
+Cerca dopo
+Vedi Aiuto
+1) Area di scrittura dell'utente, in cui l'utente scriverà il testo su cui verranno fatte le previsioni.
+2) Pulsante che informa se c'è stata una disconnessione con il server, attraverso il quale è possibile provare a riconnettersi.
+3) Opzione che consente di cambiare la lingua dell'interfaccia.
+4) Opzione di previsione tramite la quale è possibile accedere o registrarsi nel sistema e utilizzare i set di dati una volta registrati.
+1) Tabella di set disponibili per l'utente.
+2) Funzione per creare un nuovo set di dati da un nome set, una lingua e le caratteristiche della previsione.
+3) Campo che indica il set di dati caricati
+4) Pulsante per caricare un set selezionato.
+5) Pulsante per eliminare un set selezionato.
+1) Pulsante per selezionare un file, una directory o un indirizzo Web per aggiungerlo al set di dati attivo.
+2) Pulsante per eliminare un documento selezionato in precedenza.
+3) Pulsante per caricare i documenti del tavolo.
+4) Tabella con i documenti che verranno aggiunti.
+Vuoi chiudere l'applicazione?
+Impossibile trovare
+Vuoi eliminare il set selezionato?
+La connessione al server è stata persa.
+Errore di connessione
+Precedente
+Seguente
+Tipo
+Indirizzo

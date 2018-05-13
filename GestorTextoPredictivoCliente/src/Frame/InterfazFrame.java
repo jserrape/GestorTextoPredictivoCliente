@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.JTextArea;
+import javax.swing.UIManager;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.UndoableEditEvent;
@@ -68,7 +69,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
         inicializar("-1");
-        addWindowListener(new listenerCerrarVentana(protocolo));
+        addWindowListener(new listenerCerrarVentana(protocolo, this.config));
     }
 
     /**
@@ -85,7 +86,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/iconos/icono.png")));
         inicializar(ip);
-        addWindowListener(new listenerCerrarVentana(protocolo));
+        addWindowListener(new listenerCerrarVentana(protocolo, this.config));
     }
 
     @SuppressWarnings("unchecked")
@@ -142,7 +143,6 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -446,9 +446,6 @@ public class InterfazFrame extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem1);
 
-        jMenuItem3.setText("Acerca de (NOMBRE)");
-        jMenu4.add(jMenuItem3);
-
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -519,7 +516,7 @@ public class InterfazFrame extends javax.swing.JFrame {
                 this.dispose();
             } catch (IOException ex) {
                 this.errorConexion();
-                JOptionPane.showMessageDialog(this, "Se ha perdido la conexión con el servidor.", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, this.config.getPalabra(84), this.config.getPalabra(85), JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(InterfazFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -736,7 +733,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        AyudaFrame ayuda = new AyudaFrame(this, true,this.config);
+        AyudaFrame ayuda = new AyudaFrame(this, true, this.config);
         ayuda.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -774,7 +771,6 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JPanel jPanel1;
@@ -1265,14 +1261,19 @@ public class InterfazFrame extends javax.swing.JFrame {
     private static class listenerCerrarVentana extends WindowAdapter {
 
         private final ProtocoloConexion protocolo;
+        private final Configuracion config;
 
-        public listenerCerrarVentana(ProtocoloConexion protocolo) {
+        public listenerCerrarVentana(ProtocoloConexion protocolo, Configuracion conf) {
             this.protocolo = protocolo;
+            this.config = conf;
         }
 
         @Override
         public void windowClosing(java.awt.event.WindowEvent evt) {
-            int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea cerrar la aplicación?", "", JOptionPane.OK_CANCEL_OPTION);
+            UIManager.put("OptionPane.okButtonText", this.config.getPalabra(21));
+            UIManager.put("OptionPane.cancelButtonText", this.config.getPalabra(22));
+
+            int result = JOptionPane.showConfirmDialog((Component) null, this.config.getPalabra(81), "", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
                 try {
                     this.protocolo.enviarMensaje(0, "");
