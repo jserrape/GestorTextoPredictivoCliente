@@ -26,7 +26,8 @@ public class FormatoFrame extends javax.swing.JDialog {
      * Creates new form FormatoFrame
      *
      * @param parent Frame intermaz padre
-     * @param modal Booleano que indica si en necesario cerrar esa interfaz para modificar la padre
+     * @param modal Booleano que indica si en necesario cerrar esa interfaz para
+     * modificar la padre
      * @param f Fuente del texto
      * @param in Frame intermaz padre
      * @param conf Configuracion del predictor
@@ -289,6 +290,7 @@ public class FormatoFrame extends javax.swing.JDialog {
 
     /**
      * Cierra la ventana de formao sin guardar los cambios
+     *
      * @param evt Accion del boton
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -304,7 +306,6 @@ public class FormatoFrame extends javax.swing.JDialog {
         this.inter.aplicarFormato(font);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -161,7 +161,6 @@ public class BuscarFrame extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-
     /**
      * Establece el idioma indicado en la configuracion
      */

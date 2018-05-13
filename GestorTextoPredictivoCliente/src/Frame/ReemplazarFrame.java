@@ -23,7 +23,7 @@ public class ReemplazarFrame extends javax.swing.JDialog {
 
     /**
      * Constructor parametrizado de la clase ReemplazarFrame
-     * 
+     *
      * @param parent Clase frame que invoca a ReemplazarFrame
      * @param modal Modo del JDialog
      * @param jt JTextArea principal de escritura
@@ -43,7 +43,6 @@ public class ReemplazarFrame extends javax.swing.JDialog {
         Comienzo = 0;
         Final = 0;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -165,7 +164,7 @@ public class ReemplazarFrame extends javax.swing.JDialog {
 
     /**
      * Cierra el frame
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -178,7 +177,7 @@ public class ReemplazarFrame extends javax.swing.JDialog {
 
     /**
      * Reemplaza la ocurrencia con el texto escrito
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonReemplazarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReemplazarTActionPerformed
@@ -186,8 +185,8 @@ public class ReemplazarFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_botonReemplazarTActionPerformed
 
     /**
-     * Busca la siguiente palabra que coincida 
-     * 
+     * Busca la siguiente palabra que coincida
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
@@ -231,7 +230,7 @@ public class ReemplazarFrame extends javax.swing.JDialog {
 
     /**
      * Reemplaza la ocurrencia con el texto escrito
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonReemplazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReemplazarActionPerformed
@@ -241,7 +240,6 @@ public class ReemplazarFrame extends javax.swing.JDialog {
             Final = 0;
         }
     }//GEN-LAST:event_botonReemplazarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
@@ -267,7 +265,7 @@ public class ReemplazarFrame extends javax.swing.JDialog {
 
         /**
          * Consrucor parametrizado
-         * 
+         *
          * @param jTF JTextField de escritura
          * @param bs Boton siguiente
          * @param br Boton reemplazar

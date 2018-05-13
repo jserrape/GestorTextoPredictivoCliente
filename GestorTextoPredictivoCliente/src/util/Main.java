@@ -14,9 +14,9 @@ public class Main {
     public static void main(String[] args) throws IOException, BadLocationException {
 
         InterfazFrame interfaz;
-        if(args.length==0){
+        if (args.length == 0) {
             interfaz = new InterfazFrame();
-        }else{
+        } else {
             interfaz = new InterfazFrame(args[0]);
         }
         interfaz.setVisible(true);

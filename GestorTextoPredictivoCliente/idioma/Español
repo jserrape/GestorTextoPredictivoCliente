@@ -65,3 +65,17 @@ Otro
 Buscar:
 Coincidir mayúsculas y minúsculas
 Buscar siguiente
+Ver la Ayuda
+1) Zona de escritura del usuario, en la que el usuario redactará el texto sobre el que se realizarán las predicciones.
+2) Botón que informa si se ha producido una desconexión con el servidor, mediante el cual se puede tratar de volver a conectar.
+3) Opción que permite cambiar el idioma de la interfaz.
+4) Opción de predicción mediante la cual se puede iniciar sesión o registrarse en el sistema,  y utilizar conjuntos de datos una vez registrado.
+1) Tabla de conjuntos de los que dispone el usuario.
+2) Característica para crear un nuevo conjunto de datos a partir de un nombre de conjunto, un idioma y las características de la predicción. 
+3) Campo que indica el conjunto de daos cargado
+4) Botón para cargar un conjunto seleccionado.
+5) Botón para eliminar un conjunto seleccionado.
+1) Botón para seleccionar un fichero, directorio o dirección web para añadirlo al conjunto de datos activo.
+2) Botón para eliminar un documento previamente seleccionado.
+3) Botón para cargar los documentos de la tabla.
+4) Tabla con los documentos que se añadirán.

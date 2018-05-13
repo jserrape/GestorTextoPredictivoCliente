@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-
 /**
  *
  * @author jcsp0003
@@ -38,9 +37,8 @@ public class nuevaURLFrame extends javax.swing.JDialog {
 
         this.jTextField1.addKeyListener(new KeyListenerImpl(botonAceptar, jTextField1));
         this.confPrediccion = op;
-        this.jTextField1.addMouseListener(new MouseListenerImpl(this.jPopupMenu1,this.jTextField1));
+        this.jTextField1.addMouseListener(new MouseListenerImpl(this.jPopupMenu1, this.jTextField1));
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,7 +111,7 @@ public class nuevaURLFrame extends javax.swing.JDialog {
 
     /**
      * Envia la url escria a la clase ConfigurarPrediccion
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
@@ -127,7 +125,7 @@ public class nuevaURLFrame extends javax.swing.JDialog {
 
     /**
      * Cierra el frame
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -207,9 +205,9 @@ public class nuevaURLFrame extends javax.swing.JDialog {
         private final JPopupMenu popMenu;
         private final javax.swing.JTextField jTextField;
 
-        public MouseListenerImpl(JPopupMenu pop,javax.swing.JTextField jT) {
+        public MouseListenerImpl(JPopupMenu pop, javax.swing.JTextField jT) {
             this.popMenu = pop;
-            this.jTextField=jT;
+            this.jTextField = jT;
         }
 
         /**
@@ -245,15 +243,15 @@ public class nuevaURLFrame extends javax.swing.JDialog {
 
                 item = new JMenuItem("Cortar");
                 this.popMenu.add(item);
-                item.addActionListener(new ActionListenerImpl(jTextField,1));
-                
+                item.addActionListener(new ActionListenerImpl(jTextField, 1));
+
                 item = new JMenuItem("Copiar");
                 this.popMenu.add(item);
-                item.addActionListener(new ActionListenerImpl(jTextField,2));
-                
+                item.addActionListener(new ActionListenerImpl(jTextField, 2));
+
                 item = new JMenuItem("Pegar");
                 this.popMenu.add(item);
-                item.addActionListener(new ActionListenerImpl(jTextField,3));
+                item.addActionListener(new ActionListenerImpl(jTextField, 3));
 
                 this.popMenu.show(e.getComponent(), e.getX(), e.getY());
             }
@@ -284,24 +282,26 @@ public class nuevaURLFrame extends javax.swing.JDialog {
 
             private final javax.swing.JTextField jTextField;
             private final int valor;
-            
+
             /**
              * Consrucor parametrizado
+             *
              * @param jT Caja de texto de la url
-             * @param valor 
+             * @param valor
              */
-            public ActionListenerImpl(javax.swing.JTextField jT,int valor) {
-                this.jTextField=jT;
-                this.valor=valor;
+            public ActionListenerImpl(javax.swing.JTextField jT, int valor) {
+                this.jTextField = jT;
+                this.valor = valor;
             }
 
             /**
              * Evento de seleccionar el iem y decidir la acción correspondiene
+             *
              * @param e Evento de seleccion del item
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch(valor){
+                switch (valor) {
                     case 1: //Cortar
                         this.jTextField.cut();
                         break;

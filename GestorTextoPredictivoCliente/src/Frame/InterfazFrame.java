@@ -70,8 +70,8 @@ public class InterfazFrame extends javax.swing.JFrame {
         inicializar("-1");
         addWindowListener(new listenerCerrarVentana(protocolo));
     }
-    
-        /**
+
+    /**
      * Construcor parametrizado
      *
      * @param ip Ip del servidor
@@ -142,6 +142,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -437,8 +438,16 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         jMenu4.setText("Ayuda");
 
-        jMenuItem1.setText("Acerca de (NOMBRE)");
+        jMenuItem1.setText("Ver la ayuda");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem1);
+
+        jMenuItem3.setText("Acerca de (NOMBRE)");
+        jMenu4.add(jMenuItem3);
 
         jMenuBar1.add(jMenu4);
 
@@ -717,7 +726,7 @@ public class InterfazFrame extends javax.swing.JFrame {
      * @param evt Evento de pulsar el un boton
      */
     private void itemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCerrarSesionActionPerformed
-        int result = JOptionPane.showConfirmDialog((Component) null, "¿Dese cerrar sesión?", "alert", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea cerrar sesión?", "alert", JOptionPane.OK_CANCEL_OPTION);
         if (result == 0) {
             this.registrado = false;
             itemCerrarSesion.setVisible(false);
@@ -725,6 +734,11 @@ public class InterfazFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemCerrarSesionActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        AyudaFrame ayuda = new AyudaFrame(this, true,this.config);
+        ayuda.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemGuardarComo;
@@ -760,6 +774,7 @@ public class InterfazFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JPanel jPanel1;
@@ -833,7 +848,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         separadorSesion.setVisible(false);
         botonError.setVisible(false);
         jMenuItem18.setEnabled(true);
-        config = new Configuracion(this,ip);
+        config = new Configuracion(this, ip);
         setIdiomaInterfaz();
         registrado = false;
         protocolo = new ProtocoloConexion(config);
@@ -943,7 +958,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         jMenuItem17.setText(this.config.getPalabra(18));
         jMenuItem18.setText(this.config.getPalabra(19));
         jMenuItem19.setText(this.config.getPalabra(20));
-        jMenuItem1.setText(this.config.getPalabra(21)); //<--- Cambiar
+        jMenuItem1.setText(this.config.getPalabra(67));
         this.setTitle(this.config.getPalabra(34));
     }
 

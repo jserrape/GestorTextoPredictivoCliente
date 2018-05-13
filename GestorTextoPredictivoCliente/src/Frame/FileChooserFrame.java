@@ -29,7 +29,7 @@ public class FileChooserFrame extends javax.swing.JDialog {
     private final int accion;
 
     /**
-     * Constructor parametrizado 
+     * Constructor parametrizado
      *
      * @param parent Clase frame que invoca a FileChooserFrame
      * @param modal Modo del JDialog
@@ -88,7 +88,7 @@ public class FileChooserFrame extends javax.swing.JDialog {
 
     /**
      * Accion de pulsar el boton de abrir/guardar
-     * 
+     *
      * @param evt Accion del boton
      */
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
@@ -100,10 +100,9 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
-    
     /**
      * Funcion de guardar un fichero en un directorio específico
-     * 
+     *
      * @param evt Accion del boton
      */
     private void guardarComo(java.awt.event.ActionEvent evt) {
@@ -126,11 +125,10 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
-    
     /**
-     * 
+     *
      * Crea un fichero en caso de no existir
-     * 
+     *
      * @param SelectedFile Nombre del archivo seleccionado
      */
     private void crearFichero(String SelectedFile) {
@@ -151,10 +149,9 @@ public class FileChooserFrame extends javax.swing.JDialog {
         this.dispose();
     }
 
-    
     /**
      * Funcion para abrir un fichero
-     * 
+     *
      * @param evt Evento de pulsar el un boton
      */
     private void abrir(java.awt.event.ActionEvent evt) {
@@ -179,7 +176,6 @@ public class FileChooserFrame extends javax.swing.JDialog {
         }
     }
 
-    
     /**
      * Función de apertura del contenido de un .txt
      */
@@ -228,10 +224,9 @@ public class FileChooserFrame extends javax.swing.JDialog {
         private final String extension;
         private final String description;
 
-        
         /**
          * Constructor parametrizado
-         * 
+         *
          * @param extension Extensión del fichero
          * @param description Descripion de la extensión
          */
@@ -242,7 +237,7 @@ public class FileChooserFrame extends javax.swing.JDialog {
 
         /**
          * Acepta o rechaza un documento
-         * 
+         *
          * @param file Archivo del directorio
          * @return Aceptación o rechazo del fichero
          */
@@ -256,7 +251,7 @@ public class FileChooserFrame extends javax.swing.JDialog {
 
         /**
          * Devuelve la descripcion del tipo de fichero
-         * 
+         *
          * @return Descripcion del tipo de fichero
          */
         @Override

@@ -21,8 +21,8 @@ public class HiloLecturaFicheros implements Runnable {
     private final ArrayList<String> urls;
 
     /**
-     * Constructor paramettrizado de la clase HiloLecturaFicheros 
-     * 
+     * Constructor paramettrizado de la clase HiloLecturaFicheros
+     *
      * @param prot Clase con las funciones de comunicación con el servidor
      * @param ficheros Array con los ficheros a leer
      * @param urls Array con las urls a leer

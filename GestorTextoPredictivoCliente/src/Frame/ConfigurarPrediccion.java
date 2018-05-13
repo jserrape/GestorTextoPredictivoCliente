@@ -46,6 +46,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * @param protocol Objeto con las funciones para comunicarse de con el
      * servidor
      * @param interf Frame principal de escritura
+     * @param conf
      */
     public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf, Configuracion conf) {
         super(parent, modal);
@@ -376,7 +377,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (this.tablaConjuntos.getSelectedRow() != -1) {
-            int result = JOptionPane.showConfirmDialog((Component) null, "¿Dese eliminar el conjunto seleccionado?", "", JOptionPane.OK_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog((Component) null, "¿Desea eliminar el conjunto seleccionado?", "", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
                 String lista;
                 try {
@@ -582,7 +583,6 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

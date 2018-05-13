@@ -140,7 +140,7 @@ public class ProtocoloConexion {
 
     /**
      * Se desconecta del servidor
-     * 
+     *
      * @throws java.io.IOException Excepcion en las E/S
      */
     public void desconectar() throws IOException {
@@ -165,7 +165,7 @@ public class ProtocoloConexion {
 
     /**
      * Registrar cuena en el servidor
-     * 
+     *
      * @param mensaje Mensaje con los datos de la cuenta
      * @return Registro correcto 1 o incorrecto -1
      * @throws IOException Excepcion en las E/S
