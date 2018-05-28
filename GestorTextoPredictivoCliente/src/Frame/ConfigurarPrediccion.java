@@ -530,6 +530,12 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         ArrayList<String> ficheros = new ArrayList();
         ArrayList<String> urls = new ArrayList();
+        String so;
+        if (System.getProperty("os.name").toLowerCase().charAt(0) == 'w') {
+            so = "\\";
+        } else {
+            so = "//";
+        }
         int index;
         for (int i = 0; i < modeloTablaFicheros.getRowCount(); i++) {
             switch (modeloTablaFicheros.getValueAt(i, 0).toString()) {
@@ -546,8 +552,8 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
                             index = fich1.getName().lastIndexOf('.');
                             if (index != -1) {
                                 if (".pdf".equals(fich1.getName().substring(index, fich1.getName().length()).toLowerCase())) {
-                                    if (!ficheros.contains(modeloTablaFicheros.getValueAt(i, 1).toString() + "\\" + fich1.getName())) {
-                                        ficheros.add(modeloTablaFicheros.getValueAt(i, 1).toString() + "\\" + fich1.getName());
+                                    if (!ficheros.contains(modeloTablaFicheros.getValueAt(i, 1).toString() + so + fich1.getName())) {
+                                        ficheros.add(modeloTablaFicheros.getValueAt(i, 1).toString() + so + fich1.getName());
                                     }
                                 }
                             }
