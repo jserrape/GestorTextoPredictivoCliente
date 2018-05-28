@@ -19,6 +19,7 @@ public class HiloLecturaFicheros implements Runnable {
     private final ProtocoloConexion protocolo;
     private final ArrayList<String> ficheros;
     private final ArrayList<String> urls;
+    private final String regex;
 
     /**
      * Constructor paramettrizado de la clase HiloLecturaFicheros
@@ -31,6 +32,7 @@ public class HiloLecturaFicheros implements Runnable {
         this.protocolo = prot;
         this.ficheros = ficheros;
         this.urls = urls;
+        regex="[^\\dA-Za-z.'çâ-ûà-ùä-üà-à ]";
     }
 
     /**
@@ -43,11 +45,11 @@ public class HiloLecturaFicheros implements Runnable {
         try {
             for (int i = 0; i < ficheros.size(); i++) {
                 texto = lectura.lectura("pdf", ficheros.get(i));
-                this.protocolo.enviarMensaje(6, texto.replaceAll(":", ".").toLowerCase().replaceAll("[^\\dA-Za-z.'çâ-ûà-ùä-üá-úÁ-Ú ]", ""));
+                this.protocolo.enviarMensaje(6, texto.replaceAll(":", ".").toLowerCase().replaceAll(regex, ""));
             }
             for (int i = 0; i < urls.size(); i++) {
                 texto = lectura.lectura("url", urls.get(i));
-                this.protocolo.enviarMensaje(6, texto.toLowerCase().replaceAll("[^\\dA-Za-z.'çâ-ûà-ùä-üá-úÁ-Ú ]", ""));
+                this.protocolo.enviarMensaje(6, texto.toLowerCase().replaceAll(regex, ""));
             }
         } catch (IOException ex) {
             Logger.getLogger(HiloLecturaFicheros.class.getName()).log(Level.SEVERE, null, ex);

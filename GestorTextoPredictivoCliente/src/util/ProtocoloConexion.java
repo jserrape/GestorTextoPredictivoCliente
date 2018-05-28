@@ -148,7 +148,7 @@ public class ProtocoloConexion {
         config.getOut().close();
         config.getIn().close();
         config.getStdIn().close();
-        config.getKkSocket().close();
+        config.getSocket().close();
     }
 
     /**

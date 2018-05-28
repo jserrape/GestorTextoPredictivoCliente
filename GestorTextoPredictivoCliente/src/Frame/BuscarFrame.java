@@ -13,7 +13,7 @@ import util.Configuracion;
 
 /**
  *
- * @author Xenahort
+ * @author jcsp0003
  */
 public class BuscarFrame extends javax.swing.JDialog {
 
@@ -27,6 +27,7 @@ public class BuscarFrame extends javax.swing.JDialog {
      * @param parent Clase frame que invoca a BuscarFrame
      * @param modal Modo del JDialog
      * @param jt JTextArea principal de escritura
+     * @param conf Configuración con las cadenas de texto del idioma
      */
     public BuscarFrame(java.awt.Frame parent, boolean modal, javax.swing.JTextArea jt, Configuracion conf) {
         super(parent, modal);

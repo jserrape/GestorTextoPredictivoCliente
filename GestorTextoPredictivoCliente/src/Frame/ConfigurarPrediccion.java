@@ -47,7 +47,7 @@ public class ConfigurarPrediccion extends javax.swing.JDialog {
      * @param protocol Objeto con las funciones para comunicarse de con el
      * servidor
      * @param interf Frame principal de escritura
-     * @param conf
+     * @param conf Configuración con las cadenas de texto del idioma
      */
     public ConfigurarPrediccion(java.awt.Frame parent, boolean modal, ProtocoloConexion protocol, InterfazFrame interf, Configuracion conf) {
         super(parent, modal);

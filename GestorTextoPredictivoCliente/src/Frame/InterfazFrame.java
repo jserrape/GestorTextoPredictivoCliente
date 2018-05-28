@@ -856,7 +856,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
         Posicion posi = new Posicion();
 
-        this.jTextArea1.addKeyListener(new listenerEscritura(this.popUp, posi, this.jTextArea1, this.protocolo, botonError, itemCerrarSesion, separadorSesion, this));
+        this.jTextArea1.addKeyListener(new listenerEscritura(this.popUp, posi, this.jTextArea1, this.protocolo, botonError, itemCerrarSesion, separadorSesion));
         this.jTextArea1.addCaretListener(new listenerCaret(this.jTextArea1, posi));
         this.jTextArea1.addMouseListener(new listenerPopUpCopiarPegar(this.jPopupMenu2, this.jTextArea1));
 
@@ -980,7 +980,7 @@ public class InterfazFrame extends javax.swing.JFrame {
         private final JButton botonError;
         private final JMenuItem itemCerrarSesion;
         private final Separator separadorSesion;
-        private final InterfazFrame interfaz;
+
 
         /**
          * Construcor paramerizado
@@ -990,7 +990,7 @@ public class InterfazFrame extends javax.swing.JFrame {
          * @param jt Area de texo sobre la que se escribe
          * @param prot Proocolo de conexion
          */
-        public listenerEscritura(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot, JButton botonError, JMenuItem itemCerrarSesion, Separator separadorSesion, InterfazFrame interfaz) {
+        public listenerEscritura(PopUpMenu pop, Posicion p, JTextArea jt, ProtocoloConexion prot, JButton botonError, JMenuItem itemCerrarSesion, Separator separadorSesion) {
             this.popMenu = pop;
             this.pos = p;
             this.jt = jt;
@@ -998,7 +998,6 @@ public class InterfazFrame extends javax.swing.JFrame {
             this.botonError = botonError;
             this.itemCerrarSesion = itemCerrarSesion;
             this.separadorSesion = separadorSesion;
-            this.interfaz = interfaz;
         }
 
         /**
@@ -1051,6 +1050,7 @@ public class InterfazFrame extends javax.swing.JFrame {
                     caracteresAnteriores = this.jt.getCaretPosition() - 60;
                 }
                 String texto = this.jt.getText().substring(caracteresAnteriores, this.jt.getCaretPosition());
+                
 
                 boolean acabado = false;
                 if (this.jt.getCaretPosition() != 0) {
@@ -1059,7 +1059,7 @@ public class InterfazFrame extends javax.swing.JFrame {
 
                 try {
                     String srtResultado;
-                    //SACAR AQUI LA RESPUESTA DEL SERVIDOR
+
                     if (acabado) {
                         srtResultado = this.protocolo.enviarMensaje(7, 1 + texto.toLowerCase());
                     } else {

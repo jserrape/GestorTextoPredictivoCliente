@@ -20,9 +20,9 @@ public class AyudaFrame extends javax.swing.JDialog {
     /**
      * Creates new form AyudaFrame
      *
-     * @param parent
-     * @param modal
-     * @param conf
+     * @param parent Clase frame que invoca a AyudaFrame
+     * @param modal Modo del JDialog
+     * @param conf Configuración con las cadenas de texto del idioma
      */
     public AyudaFrame(java.awt.Frame parent, boolean modal, Configuracion conf) {
         super(parent, modal);
@@ -41,6 +41,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         this.jLabel1.setIcon(icon);
     }
 
+    /**
+     * Mensajes a mostrar para la vista de ayuda 1
+     */
     private void ayuda1() {
         jTextArea1.setText(this.config.getPalabra(68));
         jTextArea1.append("\n\n" + this.config.getPalabra(69));
@@ -48,6 +51,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         jTextArea1.append("\n\n" + this.config.getPalabra(71));
     }
 
+    /**
+     * Mensajes a mostrar para la vista de ayuda 2
+     */
     private void ayuda2() {
         jTextArea1.setText(this.config.getPalabra(72));
         jTextArea1.append("\n\n" + this.config.getPalabra(73));
@@ -56,6 +62,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         jTextArea1.append("\n\n" + this.config.getPalabra(76));
     }
 
+    /**
+     * Mensajes a mostrar para la vista de ayuda 3
+     */
     private void ayuda3() {
         jTextArea1.setText(this.config.getPalabra(77));
         jTextArea1.append("\n\n" + this.config.getPalabra(78));
@@ -63,6 +72,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         jTextArea1.append("\n\n" + this.config.getPalabra(80));
     }
 
+    /**
+     * Muestra la siguiente vista de ayuda
+     */
     private void siguiente() {
         if (imagenAyuda < 3) {
             ++imagenAyuda;
@@ -82,6 +94,9 @@ public class AyudaFrame extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Muestra la vista de ayuda anterior
+     */
     private void anterior() {
         if (imagenAyuda > 1) {
             --imagenAyuda;
@@ -183,14 +198,26 @@ public class AyudaFrame extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botón para mostrar la ayuda siguiente
+     * @param evt Evento de pulsar el botón
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         siguiente();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * Botón para cerrar la vista
+     * @param evt Evento de pulsar el botón
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Botón para mostrar la ayuda anterior
+     * @param evt Evento de pulsar el botón
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         anterior();
     }//GEN-LAST:event_jButton1ActionPerformed

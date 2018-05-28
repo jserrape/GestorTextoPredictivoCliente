@@ -30,7 +30,7 @@ public class FormatoFrame extends javax.swing.JDialog {
      * modificar la padre
      * @param f Fuente del texto
      * @param in Frame intermaz padre
-     * @param conf Configuracion del predictor
+     * @param conf Configuracion del predictor y cadenas de idioma
      */
     public FormatoFrame(java.awt.Frame parent, boolean modal, Font f, InterfazFrame in, Configuracion conf) {
         super(parent, modal);
