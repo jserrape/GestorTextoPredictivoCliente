@@ -95,7 +95,7 @@ public class PopUpMenu {
         public void actionPerformed(ActionEvent e) {
             StringBuilder sb = new StringBuilder(jt.getText());
             if (jt.getText().charAt(jt.getCaretPosition() - 1) != ' ') {
-                String semilla; //semilla
+                String semilla; 
                 if (jt.getCaretPosition() - 10 < 0) {
                     semilla = jt.getText().substring(0, jt.getCaretPosition());
                 } else {
@@ -161,7 +161,7 @@ public class PopUpMenu {
             if (mke.getKeyCode() == 10 && this.item.isArmed()) {
                 StringBuilder sb = new StringBuilder(jt.getText());
                 if (jt.getText().charAt(jt.getCaretPosition() - 1) != ' ') {
-                    String semilla; //semilla
+                    String semilla; 
                     if (jt.getCaretPosition() - 10 < 0) {
                         semilla = jt.getText().substring(0, jt.getCaretPosition());
                     } else {

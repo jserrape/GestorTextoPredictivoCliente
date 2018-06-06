@@ -981,7 +981,6 @@ public class InterfazFrame extends javax.swing.JFrame {
         private final JMenuItem itemCerrarSesion;
         private final Separator separadorSesion;
 
-
         /**
          * Construcor paramerizado
          *
@@ -1050,11 +1049,10 @@ public class InterfazFrame extends javax.swing.JFrame {
                     caracteresAnteriores = this.jt.getCaretPosition() - 60;
                 }
                 String texto = this.jt.getText().substring(caracteresAnteriores, this.jt.getCaretPosition());
-                
 
                 boolean acabado = false;
                 if (this.jt.getCaretPosition() != 0) {
-                    acabado = this.jt.getText().charAt(texto.length() - 1) == ' ';
+                    acabado = this.jt.getText().charAt(this.jt.getText().length() - 1) == ' ';
                 }
 
                 try {
